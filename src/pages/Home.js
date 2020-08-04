@@ -1,12 +1,13 @@
 import React from "react";
 import NavBar from "../components/navbar/NavBar";
+import MainBanner from "../components/movieList/MainBanner";
 
 function Home() {
   return (
-    <div>
+    <React.Fragment>
       <NavBar />
-      <h2>홈</h2>
-    </div>
+      <MainBanner />
+    </React.Fragment>
   );
 }
 

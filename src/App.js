@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import Home from "./routes/Home";
-import MyMovie from "./routes/MyMovie";
+import Home from "./pages/Home";
+import MyMovie from "./pages/MyMovie";
 
 import "./App.css";
 
