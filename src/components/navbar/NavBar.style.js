@@ -16,13 +16,18 @@ const commonFlex = `
 
 /* Desktop */
 const Nav = styled.nav`
-  background-color: #fff;
-  box-shadow: inset 0px -1px 0px #f3f3f4;
-  position: fixd;
+  background-color: ${(props) => (props.isScroll ? "#141414" : "")};
+  transition: background-color 0.5s linear;
+  position: fixed;
   ${commonFlex}
   justify-content: space-between;
   padding: 20px 30px;
   height: 80px;
+  width: 100%;
+  z-index: 2;
+  & > span {
+    color: white;
+  }
 `;
 
 const Logo = styled.a`
@@ -36,6 +41,7 @@ const RightMenu = styled.ul`
   ${commonUl}
   ${commonFlex}
   font-size: 1.2rem;
+  color: white;
   li {
     ${commonFlex}
     padding-left: 15px;
@@ -67,7 +73,7 @@ const MenuIcon = styled(MenuOutlined)`
 `;
 
 const MobileNav = styled.div`
-  background-color: white;
+  background-color: #202020;
   width: 280px;
   height: 100%;
   padding: 10px 20px;
@@ -75,7 +81,7 @@ const MobileNav = styled.div`
   top: 0;
   right: ${(props) => (props.isMenuOpen ? "0px" : "-282px")};
   z-index: 10;
-  border: 1px solid #c9c9c9;
+  border: 1px solid #353535;
   transition: All 0.5s ease;
 `;
 
@@ -113,7 +119,6 @@ const MobileRightMenu = styled.ul`
     }
     a:hover {
       background-color: #131313;
-      color: white;
       font-weight: normal;
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 import { Input } from "antd";
@@ -8,22 +8,31 @@ import * as S from "./NavBar.style";
 function NavBar() {
   const [menuOpen, setmenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [didScroll, setDidScroll] = useState(false);
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   let inputRef = useRef(null);
 
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      const scrollTop = e.srcElement.scrollingElement.scrollTop;
+      if (scrollTop >= 80) {
+        setDidScroll(true);
+      } else {
+        setDidScroll(false);
+      }
+    });
+  });
+
   const openMenu = () => setmenuOpen(!menuOpen);
+  const closeSearchForm = () => setSearchOpen(!searchOpen);
 
   const showSearchForm = () => {
     setSearchOpen(!searchOpen);
     inputRef.current.focus();
   };
 
-  const closeSearchForm = () => {
-    setSearchOpen(!searchOpen);
-  };
-
   return (
-    <S.Nav>
+    <S.Nav isScroll={didScroll}>
       <S.Logo href="/">Movies</S.Logo>
       {!isTabletOrMobile ? (
         <S.RightMenu>
