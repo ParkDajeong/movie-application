@@ -18,7 +18,6 @@ const MainBanner = styled.article`
 const BannerCover = styled.div`
   width: 100%;
   height: 800px;
-  position: fixed;
   top: 0;
   left: 0;
   background: linear-gradient(to bottom, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.5) 65%, rgba(20, 20, 20, 0.75) 83%, rgba(20, 20, 20, 1) 92%);

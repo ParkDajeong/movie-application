@@ -16,7 +16,7 @@ const commonFlex = `
 
 /* Desktop */
 const Nav = styled.nav`
-  background-color: ${(props) => (props.isScroll ? "#141414" : "")};
+  background-color: ${(props) => (props.isScroll ? "rgba(20,20,20,0.95);" : "")};
   transition: background-color 0.5s linear;
   position: fixed;
   ${commonFlex}
