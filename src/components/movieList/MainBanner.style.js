@@ -4,7 +4,8 @@ import { Button } from "antd";
 // radial-gradient(rgba(20, 20, 20, 0) 10%, rgba(20, 20, 20, 0) 10%, rgba(20, 20, 20, 0.8) 90%),
 const MainBanner = styled.article`
   position: relative;
-  background: radial-gradient(rgba(20, 20, 20, 0) 30%, rgba(20, 20, 20, 0.1) 60%, rgba(20, 20, 20, 0.7) 95%), url("https://imgur.com/2B8OWR9.jpg");
+  background: radial-gradient(rgba(20, 20, 20, 0) 30%, rgba(20, 20, 20, 0.1) 60%, rgba(20, 20, 20, 0.7) 95%), 
+  ${(props) => props.image && `url(${props.image});`}
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

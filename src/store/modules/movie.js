@@ -1,21 +1,43 @@
 import * as MovieAPI from "../../lib/movieAPI";
-import { API_URL, API_KEY } from "../../config/config";
 
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
+const CHANGE_LIKELIST = "movieApp/CHANGE_LIKELIST";
 
-export const getMovieList = () => {
-  const path = `${API_URL}trending/movie/week?api_key=${API_KEY}&language=ko&page=1`;
+export const getMovieList = async () => {
+  const data = await MovieAPI.getData("trending/movie/week");
 
-  return (dispatch) => {
-    return MovieAPI.getMovies(path) //
-      .then((res) => dispatch({ type: GET_MOVIES, data: res.results }))
-      .catch((err) => console.log(err));
-  };
+  return { type: GET_MOVIES, data: data.results };
 };
 
-export const getMainBanner = () => {
-  const path = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko&page=1`;
+export const getMainBanner = async () => {
+  let randomMovie = {};
+  const movieList = (await MovieAPI.getData("trending/movie/week")).results;
+
+  console.log("메인배너리스트", movieList);
+
+  while (true) {
+    const randomMovieId = movieList[Math.floor(Math.random() * movieList.length)].id;
+    randomMovie = await MovieAPI.getData(`movie/${randomMovieId}`);
+
+    if (randomMovie.title && randomMovie.tagline && randomMovie.backdrop_path) {
+      randomMovie = {
+        data: randomMovie,
+        type: GET_MAINBANNERS,
+      };
+      console.log("랜덤무비", randomMovie);
+      break;
+    }
+  }
+
+  return randomMovie;
+};
+
+export const changeLikeList = () => {
+  return {
+    type: CHANGE_LIKELIST, //
+    payload: localStorage.length,
+  };
 };
 
 export default function (state = [], action) {
@@ -24,6 +46,15 @@ export default function (state = [], action) {
       return {
         ...state,
         movies: action.data,
+      };
+    case GET_MAINBANNERS:
+      return {
+        ...state,
+        mainBanner: action.data,
+      };
+    case CHANGE_LIKELIST:
+      return {
+        listCnt: action.payload,
       };
     default:
       return state;

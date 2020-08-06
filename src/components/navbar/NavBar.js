@@ -9,7 +9,7 @@ function NavBar() {
   const [menuOpen, setmenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [didScroll, setDidScroll] = useState(false);
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
   let inputRef = useRef(null);
 
   useEffect(() => {
