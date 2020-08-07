@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMainBanner } from "../../store/modules/movie";
 import { IMAGE_BASE_URL } from "../../config/config";

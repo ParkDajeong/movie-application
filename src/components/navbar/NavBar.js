@@ -42,7 +42,7 @@ function NavBar() {
               size="large"
               placeholder="Search"
               prefix={<SearchOutlined />}
-              isSearchOpen={searchOpen}
+              searchopen={searchOpen ? 1 : 0}
               onBlur={closeSearchForm}
             />
             {searchOpen ? ( //

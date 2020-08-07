@@ -44,15 +44,18 @@ const Poster = styled.div`
 `;
 
 const Like = styled(HeartFilled)`
-  position: absolute;
-  top: 0;
-  right: 0;
+  ${(props) =>
+    !props.detailPage &&
+    `position: absolute;
+    top: 0;
+    right: 0;`}
+
   font-size: 2.2rem;
   padding: 15px 10px;
   cursor: pointer;
   transition: all 0.5s ease;
   ${(props) => (props.liked ? "color: #ff7875;" : "color: #eee;")}
-  ${(props) => (props.isMobile ? "opacity: 1; " : "opacity: 0;")}
+  ${(props) => (props.mobile ? "opacity: 1; " : "opacity: 0;")}
   svg {
     filter: drop-shadow(1px 0px 2px rgba(0, 0, 0, 0.4));
   }
@@ -60,7 +63,7 @@ const Like = styled(HeartFilled)`
 
 const Info = styled.div`
   ${(props) =>
-    props.isMobile //
+    props.mobile //
       ? `bottom: 0;
         height: auto;
         background-color: rgb(20, 20, 20, 0.7);

@@ -3,6 +3,7 @@ import * as MovieAPI from "../../lib/movieAPI";
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
 const CHANGE_LIKELIST = "movieApp/CHANGE_LIKELIST";
+const GET_MOVIE_INFO = "movieApp/GET_MOVIE_INFO";
 
 export const getMovieList = async () => {
   const data = await MovieAPI.getData("trending/movie/week");
@@ -14,8 +15,6 @@ export const getMainBanner = async () => {
   let randomMovie = {};
   const movieList = (await MovieAPI.getData("trending/movie/week")).results;
 
-  console.log("메인배너리스트", movieList);
-
   while (true) {
     const randomMovieId = movieList[Math.floor(Math.random() * movieList.length)].id;
     randomMovie = await MovieAPI.getData(`movie/${randomMovieId}`);
@@ -25,12 +24,17 @@ export const getMainBanner = async () => {
         data: randomMovie,
         type: GET_MAINBANNERS,
       };
-      console.log("랜덤무비", randomMovie);
       break;
     }
   }
 
   return randomMovie;
+};
+
+export const getMovieDetail = async (movieId) => {
+  const data = await MovieAPI.getData(`movie/${movieId}`);
+
+  return { type: GET_MOVIE_INFO, data };
 };
 
 export const changeLikeList = () => {
@@ -51,6 +55,11 @@ export default function (state = [], action) {
       return {
         ...state,
         mainBanner: action.data,
+      };
+    case GET_MOVIE_INFO:
+      return {
+        ...state,
+        movieInfo: action.data,
       };
     case CHANGE_LIKELIST:
       return {

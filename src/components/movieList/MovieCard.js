@@ -45,15 +45,15 @@ function MovieCard(props) {
             src={`${IMAGE_BASE_URL}w500${props.poster}`}
             alt={props.title}
           />
-          <Info isMobile={isTabletOrMobile}>
+          <Info mobile={isTabletOrMobile ? 1 : 0}>
             <span>{props.title}</span>
             <Rate rate={props.rate} />
           </Info>
         </a>
         <Like //
           onClick={toggleLikeBtn}
-          liked={isLike}
-          isMobile={isTabletOrMobile}
+          liked={isLike ? 1 : 0}
+          mobile={isTabletOrMobile ? 1 : 0}
         />
       </Poster>
     </Col>

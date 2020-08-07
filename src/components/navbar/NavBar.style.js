@@ -17,7 +17,7 @@ const commonFlex = `
 /* Desktop */
 const Nav = styled.nav`
   background-color: ${(props) => (props.isScroll ? "rgba(20,20,20,0.95);" : "")};
-  transition: background-color 0.5s linear;
+  transition: background-color 0.6s ease;
   position: fixed;
   ${commonFlex}
   justify-content: space-between;
@@ -56,8 +56,8 @@ const RightMenu = styled.ul`
 `;
 
 const SearchForm = styled(Input)`
-  width: ${(props) => (props.isSearchOpen ? "300px" : "10px")};
-  opacity: ${(props) => (props.isSearchOpen ? "1" : "0")};
+  width: ${(props) => (props.searchopen ? "300px" : "10px")};
+  opacity: ${(props) => (props.searchopen ? "1" : "0")};
   margin-right: 10px;
   border-radius: 8px;
   transition: width 1s, opacity 0.6s linear;
