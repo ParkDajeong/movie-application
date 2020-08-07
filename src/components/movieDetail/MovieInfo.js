@@ -1,23 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import * as S from "./MovieInfo.style";
 import { useMediaQuery } from "react-responsive";
 import Rate from "../movieList/Rate";
 import { Like } from "../movieList/MovieCard.style";
+import { IMAGE_BASE_URL } from "../../config/config";
 
 function MovieInfo() {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
+  const movieDetail = useSelector((state) => state.movie.movieInfo);
 
   return (
     <S.MovieInfo>
-      <S.BackgroundImg></S.BackgroundImg>
+      <S.BackgroundImg image={`${IMAGE_BASE_URL}original${movieDetail.backdrop_path}`} />
       <S.MovieMeta mobile={isTabletOrMobile ? 1 : 0}>
         <S.Poster>
-          <img src="http://image.tmdb.org/t/p/w500/65Qf0or6IYVPaxVy7vZXFsHWXAX.jpg" alt="" />
+          <img src={`${IMAGE_BASE_URL}w500${movieDetail.poster_path}`} alt={movieDetail.title} />
         </S.Poster>
         <S.Description>
           <div>
             <S.Title>
-              <h2>하울의 움직이는 성</h2>
+              <h2>{movieDetail.title}</h2>
               <Like //
                 detailPage
                 onClick
@@ -26,15 +29,12 @@ function MovieInfo() {
               />
             </S.Title>
             <S.InfoData>
-              <span>액션, 판타지</span>
-              <span>124분</span>
+              <span>{movieDetail.genres.map((gen) => gen.name).join(", ")}</span>
+              <span>{movieDetail.runtime}</span>
             </S.InfoData>
-            <Rate detailPage rate={7.5} />
+            <Rate detailPage rate={movieDetail.vote_average} />
           </div>
-          <p>
-            수백 년 동안 어둠 속에서 싸워왔다. 인류를 지키는 불멸의 전사들. 큰 잠재력을 가진 신참을 발견하지만, 그들의 놀라운 힘도 발각된다. 잡혀선 안
-            된다, 끝까지 싸운다.
-          </p>
+          <p>{movieDetail.overview}</p>
         </S.Description>
       </S.MovieMeta>
       <div></div>

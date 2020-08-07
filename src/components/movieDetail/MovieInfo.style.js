@@ -8,7 +8,8 @@ const MovieInfo = styled.section`
 `;
 
 const BackgroundImg = styled.div`
-  background: linear-gradient(rgba(20, 20, 20, 0.5) 0%, rgba(20, 20, 20, 0.5) 100%), url("https://imgur.com/2B8OWR9.jpg");
+  background: linear-gradient(rgba(20, 20, 20, 0.5) 0%, rgba(20, 20, 20, 0.5) 100%), 
+  ${(props) => props.image && `url(${props.image});`}
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
