@@ -4,20 +4,24 @@ const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
 const CHANGE_LIKELIST = "movieApp/CHANGE_LIKELIST";
 const GET_MOVIE_INFO = "movieApp/GET_MOVIE_INFO";
+const GET_SEARCH_RESULTS = "movieApp/GET_SEARCH_RESULTS";
 
 export const getMovieList = async () => {
-  const data = await MovieAPI.getData("trending/movie/week");
+  const data = await MovieAPI.getMovieList();
 
-  return { type: GET_MOVIES, data: data.results };
+  return {
+    type: GET_MOVIES,
+    data,
+  };
 };
 
 export const getMainBanner = async () => {
   let randomMovie = {};
-  const movieList = (await MovieAPI.getData("trending/movie/week")).results;
+  const movieList = (await MovieAPI.getData("trending/movie/week", "ko")).results;
 
   while (true) {
     const randomMovieId = movieList[Math.floor(Math.random() * movieList.length)].id;
-    randomMovie = await MovieAPI.getData(`movie/${randomMovieId}`);
+    randomMovie = await MovieAPI.getData(`movie/${randomMovieId}`, "ko");
 
     if (randomMovie.title && randomMovie.tagline && randomMovie.backdrop_path) {
       randomMovie = {
@@ -32,9 +36,31 @@ export const getMainBanner = async () => {
 };
 
 export const getMovieDetail = async (movieId) => {
-  const data = await MovieAPI.getData(`movie/${movieId}`);
+  const info = await MovieAPI.getMovieDetail(movieId);
+  const credits = await MovieAPI.getMovieCredits(movieId);
+  const videos = await MovieAPI.getMovieVideos(movieId);
+  const images = await MovieAPI.getMovieImages(movieId);
+  const recommendations = await MovieAPI.getMovieRecommendations(movieId);
 
-  return { type: GET_MOVIE_INFO, data };
+  return {
+    type: GET_MOVIE_INFO,
+    data: { ...info, credits, videos, images, recommendations },
+  };
+};
+
+export const getSearchData = async (query) => {
+  if (query === "") {
+    return {
+      type: GET_SEARCH_RESULTS,
+      result: [],
+    };
+  }
+  const result = await MovieAPI.getSearchResults(query);
+
+  return {
+    type: GET_SEARCH_RESULTS,
+    result,
+  };
 };
 
 export const changeLikeList = () => {
@@ -59,7 +85,12 @@ export default function (state = [], action) {
     case GET_MOVIE_INFO:
       return {
         ...state,
-        movieInfo: action.data,
+        movieDetail: action.data,
+      };
+    case GET_SEARCH_RESULTS:
+      return {
+        ...state,
+        searchResults: action.result,
       };
     case CHANGE_LIKELIST:
       return {

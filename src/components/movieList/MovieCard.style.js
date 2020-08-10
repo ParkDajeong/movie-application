@@ -5,7 +5,7 @@ const GridWrapper = styled.div`
   width: 100%;
   margin: 1rem auto;
   padding: 30px 50px 10px;
-  ${(props) => props.myMoviePage && "padding-top: 100px; margin-top: 0;"}
+  ${(props) => props.nobanner && "padding-top: 100px; margin-top: 0;"}
   h2 {
     color: white;
     font-size: 1.5rem;
@@ -45,7 +45,7 @@ const Poster = styled.div`
 
 const Like = styled(HeartFilled)`
   ${(props) =>
-    !props.detailPage &&
+    !props.detailpage &&
     `position: absolute;
     top: 0;
     right: 0;`}

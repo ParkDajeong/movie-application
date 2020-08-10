@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-import NavBar from "../components/navbar/NavBar";
 import MovieCard from "../components/movieList/MovieCard";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
 import * as MovieAPI from "../lib/movieAPI";
@@ -19,15 +18,14 @@ function MyMovie() {
 
   return (
     <Fragment>
-      <NavBar />
-      <GridWrapper myMoviePage>
+      <GridWrapper nobanner>
         <h2>나의 영화</h2>
         {likeList.length > 0 ? (
           <Row gutter={[20, 30]}>
             {likeList.map((movie, index) => (
               <Fragment key={index}>
                 <MovieCard //
-                  myMoviePage
+                  nobanner
                   movieId={movie.id}
                   title={movie.title}
                   rate={movie.rate}

@@ -1,5 +1,4 @@
 import React, { useEffect, Fragment } from "react";
-import NavBar from "../components/navbar/NavBar";
 import MovieCard from "../components/movieList/MovieCard";
 import MainBanner from "../components/movieList/MainBanner";
 import { getMovieList } from "../store/modules/movie";
@@ -17,7 +16,6 @@ function Home() {
 
   return (
     <Fragment>
-      <NavBar />
       <MainBanner />
       <GridWrapper>
         <Row gutter={[20, 30]}>

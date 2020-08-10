@@ -1,16 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
-import { Input } from "antd";
-import "antd/dist/antd.css";
+import { CloseOutlined } from "@ant-design/icons";
 import * as S from "./NavBar.style";
+import Search from "./Search";
 
 function NavBar() {
   const [menuOpen, setmenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [didScroll, setDidScroll] = useState(false);
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
-  let inputRef = useRef(null);
 
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
@@ -24,12 +21,6 @@ function NavBar() {
   });
 
   const openMenu = () => setmenuOpen(!menuOpen);
-  const closeSearchForm = () => setSearchOpen(!searchOpen);
-
-  const showSearchForm = () => {
-    setSearchOpen(!searchOpen);
-    inputRef.current.focus();
-  };
 
   return (
     <S.Nav isScroll={didScroll}>
@@ -37,19 +28,7 @@ function NavBar() {
       {!isTabletOrMobile ? (
         <S.RightMenu>
           <li className="search">
-            <S.SearchForm //
-              ref={inputRef}
-              size="large"
-              placeholder="Search"
-              prefix={<SearchOutlined />}
-              searchopen={searchOpen ? 1 : 0}
-              onBlur={closeSearchForm}
-            />
-            {searchOpen ? ( //
-              <CloseOutlined onClick={closeSearchForm} />
-            ) : (
-              <SearchOutlined onClick={showSearchForm} />
-            )}
+            <Search />
           </li>
           <li>
             <a href="/mymovie">나의 영화</a>
@@ -69,11 +48,7 @@ function NavBar() {
             </S.CloseBtn>
             <S.MobileRightMenu>
               <li>
-                <Input //
-                  size="large"
-                  placeholder="Search"
-                  prefix={<SearchOutlined />}
-                />
+                <Search mobile />
               </li>
               <li>
                 <a href="/mymovie">나의 영화</a>

@@ -34,7 +34,7 @@ function MovieCard(props) {
   const toggleLikeBtn = () => {
     isLike ? removeLike() : addLike();
     setIsLike(!isLike);
-    props.myMoviePage && dispatch(changeLikeList());
+    props.nobanner && dispatch(changeLikeList());
   };
 
   return (
@@ -42,7 +42,7 @@ function MovieCard(props) {
       <Poster>
         <a href={`/movie/${props.movieId}`}>
           <img //
-            src={`${IMAGE_BASE_URL}w500${props.poster}`}
+            src={props.poster}
             alt={props.title}
           />
           <Info mobile={isTabletOrMobile ? 1 : 0}>

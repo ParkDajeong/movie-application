@@ -26,7 +26,7 @@ function Rate(props) {
 const StarRating = styled.div`
   display: flex;
   position: relative;
-  margin-top: ${(props) => (props.detailPage ? "8px" : "15px;")};
+  margin-top: ${(props) => (props.detailpage ? "8px" : "15px;")};
   width: fit-content;
 `;
 

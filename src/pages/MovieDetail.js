@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieDetail } from "../store/modules/movie";
-import NavBar from "../components/navbar/NavBar";
 import MovieInfo from "../components/movieDetail/MovieInfo";
 import MovieCast from "../components/movieDetail/MovieCast";
+import MovieMedia from "../components/movieDetail/MovieMedia";
+import MovieRecommendations from "../components/movieDetail/MovieRecommendations";
 
 function MovieDetail(props) {
   const dispatch = useDispatch();
   const movieId = props.match.params.movieId;
-  const movieDetail = useSelector((state) => state.movie.movieInfo);
+  const movieDetail = useSelector((state) => state.movie.movieDetail);
 
   useEffect(() => {
     dispatch(getMovieDetail(movieId));
@@ -16,11 +17,12 @@ function MovieDetail(props) {
 
   return (
     <React.Fragment>
-      <NavBar />
       {movieDetail && (
         <section>
           <MovieInfo />
           <MovieCast />
+          <MovieMedia />
+          <MovieRecommendations />
         </section>
       )}
     </React.Fragment>

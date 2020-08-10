@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { MenuOutlined } from "@ant-design/icons";
-import { Input } from "antd";
 
 /* Common */
 const commonUl = `
@@ -48,21 +47,11 @@ const RightMenu = styled.ul`
     &:first-child {
       font-size: 1.4rem;
       cursor: pointer;
+      position: relative;
     }
     a:hover {
       font-weight: 600;
     }
-  }
-`;
-
-const SearchForm = styled(Input)`
-  width: ${(props) => (props.searchopen ? "300px" : "10px")};
-  opacity: ${(props) => (props.searchopen ? "1" : "0")};
-  margin-right: 10px;
-  border-radius: 8px;
-  transition: width 1s, opacity 0.6s linear;
-  span {
-    font-size: 1.4rem;
   }
 `;
 
@@ -132,6 +121,5 @@ export {
   CloseBtn,
   MobileRightMenu,
   PageCover,
-  SearchForm,
   MenuIcon,
 };

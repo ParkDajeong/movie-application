@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import * as S from "./MovieCast.style";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { IMAGE_BASE_URL } from "../../config/config";
 
 const settings = {
   infinite: false,
@@ -39,21 +41,23 @@ const settings = {
 };
 
 function MovieCast() {
-  const test = [];
-  for (let i = 0; i < 10; i++) {
-    test.push(i);
-  }
+  const credits = useSelector((state) => state.movie.movieDetail.credits);
+  const casts = credits.cast.slice(0, 10);
 
   return (
     <S.MovieCast>
       <h2>출연</h2>
       <Slider {...settings}>
-        {test.map((movie, index) => (
+        {casts.map((cast, index) => (
           <React.Fragment key={index}>
-            <Avatar size={140} icon={<UserOutlined />} />
+            <Avatar //
+              size={150}
+              src={cast.profile_path && `${IMAGE_BASE_URL}w200${cast.profile_path}`}
+              icon={!cast.profile_path && <UserOutlined />}
+            />
             <S.CastInfo>
-              <span>배역</span>
-              <span>배우 이름</span>
+              <span>{cast.name}</span>
+              <span>{cast.character}</span>
             </S.CastInfo>
           </React.Fragment>
         ))}
