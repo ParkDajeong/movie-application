@@ -9,6 +9,8 @@ import { GridWrapper } from "../components/movieList/MovieCard.style";
 function Home() {
   const dispatch = useDispatch();
   const movieList = useSelector((state) => state.movie.movies);
+  const likeList = useSelector((state) => state.like.likeList);
+  const likeMovieIdList = likeList.map((movie) => movie.id);
 
   useEffect(() => {
     dispatch(getMovieList());
@@ -27,6 +29,7 @@ function Home() {
                   title={movie.title}
                   rate={movie.vote_average}
                   poster={movie.poster_path ? movie.poster_path : null}
+                  liked={likeMovieIdList.includes(movie.id)}
                 />
               </Fragment>
             ))}

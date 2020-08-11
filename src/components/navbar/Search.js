@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getSearchData } from "../../store/modules/movie";
+import { getSearchData } from "../../store/modules/search";
 import { SearchForm } from "./Search.style";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 import { Input } from "antd";

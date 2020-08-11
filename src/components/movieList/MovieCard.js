@@ -3,14 +3,14 @@ import { Col } from "antd";
 import { Poster, Info, Like } from "./MovieCard.style";
 import { useMediaQuery } from "react-responsive";
 import Rate from "./Rate";
-import { getLikeList } from "../../store/modules/movie";
-import { useSelector, useDispatch } from "react-redux";
+import { getLikeList } from "../../store/modules/like";
+import { useDispatch } from "react-redux";
+import notFound from "../../images/notFound.png";
 
 function MovieCard(props) {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
-  const likeList = useSelector((state) => state.movie.likeList);
-  const likeMovieIdList = likeList.map((movie) => movie.id);
-  const [isLike, setIsLike] = useState(likeMovieIdList.includes(props.movieId));
+  let isMobile = useMediaQuery({ query: "(max-width: 575px)" });
+  const [isLike, setIsLike] = useState(props.liked);
   const dispatch = useDispatch();
 
   const addLike = () => {
@@ -37,10 +37,12 @@ function MovieCard(props) {
 
   return (
     <Col xl={4} lg={6} md={8} sm={12} xs={24}>
-      <Poster>
+      <Poster //
+        mobile={isMobile ? 1 : 0}
+      >
         <a href={`/movie/${props.movieId}`}>
           <img //
-            src={props.poster}
+            src={props.poster ? props.poster : notFound}
             alt={props.title}
           />
           <Info mobile={isTabletOrMobile ? 1 : 0}>

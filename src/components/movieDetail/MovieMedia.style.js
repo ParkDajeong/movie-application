@@ -15,6 +15,7 @@ const MovieMedia = styled.section`
     display: inline-block;
   }
   div > button {
+    z-index: 2;
     width: auto;
     height: auto;
   }
@@ -69,7 +70,7 @@ const Thumbnail = styled.div`
   @media (max-width: 960px) {
     width: 40vw;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 767px) {
     width: 80vw;
   }
 `;

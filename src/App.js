@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import { getLikeList } from "./store/modules/movie";
+import { getLikeList } from "./store/modules/like";
 import NavBar from "./components/navbar/NavBar";
 import Home from "./pages/Home";
 import MyMovie from "./pages/MyMovie";

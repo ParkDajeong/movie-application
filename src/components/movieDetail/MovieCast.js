@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { IMAGE_BASE_URL } from "../../config/config";
 
 const settings = {
   infinite: false,
@@ -19,7 +18,6 @@ const settings = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,
       },
     },
     {
@@ -27,7 +25,6 @@ const settings = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        infinite: true,
       },
     },
     {
@@ -41,8 +38,7 @@ const settings = {
 };
 
 function MovieCast() {
-  const credits = useSelector((state) => state.movie.movieDetail.credits);
-  const casts = credits.cast.slice(0, 10);
+  const casts = useSelector((state) => state.movie.movieDetail.casts);
 
   return (
     <S.MovieCast>
@@ -52,7 +48,7 @@ function MovieCast() {
           <React.Fragment key={index}>
             <Avatar //
               size={150}
-              src={cast.profile_path && `${IMAGE_BASE_URL}w200${cast.profile_path}`}
+              src={cast.profile_path}
               icon={!cast.profile_path && <UserOutlined />}
             />
             <S.CastInfo>

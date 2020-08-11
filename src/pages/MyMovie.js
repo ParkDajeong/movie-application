@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Row } from "antd";
 
 function MyMovie() {
-  const likeList = useSelector((state) => state.movie.likeList);
+  const likeList = useSelector((state) => state.like.likeList);
 
   return (
     <Fragment>
@@ -20,6 +20,7 @@ function MyMovie() {
                   title={movie.title}
                   rate={movie.rate}
                   poster={movie.poster ? movie.poster : null}
+                  liked={true}
                   nobanner
                 />
               </Fragment>

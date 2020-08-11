@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { MovieMedia } from "./MovieRecommendations.style";
+import { MovieMedia } from "./SimilarMovies.style";
 import { Poster, Info } from "../movieList/MovieCard.style";
 import { useMediaQuery } from "react-responsive";
 import Rate from "../movieList/Rate";
@@ -43,13 +43,13 @@ const settings = {
 
 function MovieCast() {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
-  const recommendations = useSelector((state) => state.movie.movieDetail.recommendations);
+  const similarMovies = useSelector((state) => state.movie.movieDetail.similarMovies);
 
   return (
     <MovieMedia>
       <h2>비슷한 영화</h2>
       <Slider {...settings}>
-        {recommendations.map((movie, index) => (
+        {similarMovies.map((movie, index) => (
           <React.Fragment key={index}>
             <Poster>
               <a href={`/movie/${movie.id}`}>

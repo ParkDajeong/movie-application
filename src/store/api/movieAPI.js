@@ -1,6 +1,5 @@
 import axios from "axios";
-import { API_URL, API_KEY } from "../config/config";
-import { IMAGE_BASE_URL, YOUTUBE_URL } from "../config/config";
+import { API_URL, API_KEY, IMAGE_BASE_URL, YOUTUBE_URL } from "../../config/config";
 
 export const getData = async (type, language, query) => {
   const ko = language ? `&language=${language}` : "";
@@ -52,17 +51,26 @@ export const getMovieDetail = async (id) => {
     runtime: result.runtime,
     vote_average: result.vote_average,
     backdrop_path: `${IMAGE_BASE_URL}original${result.backdrop_path}`,
-    poster_path: result.poster_path ? `${IMAGE_BASE_URL}w500${result.poster_path}` : null,
+    poster_path: result.poster_path //
+      ? `${IMAGE_BASE_URL}w500${result.poster_path}`
+      : null,
   };
 };
 
-export const getMovieCredits = async (id) => {
+export const getMovieCast = async (id) => {
   const result = await getData(`movie/${id}/credits`);
+  let casts = result.cast.slice(0, 10);
+  casts = casts.map((cast) => {
+    return {
+      character: cast.character,
+      name: cast.name,
+      profile_path: cast.profile_path //
+        ? `${IMAGE_BASE_URL}w200${cast.profile_path}`
+        : null,
+    };
+  });
 
-  return {
-    cast: result.cast.slice(0, 10),
-    crew: result.crew.slice(0, 10),
-  };
+  return casts;
 };
 
 export const getMovieVideos = async (id) => {
@@ -88,10 +96,10 @@ export const getMovieImages = async (id) => {
   return images;
 };
 
-export const getMovieRecommendations = async (id) => {
-  const result = await getData(`movie/${id}/recommendations`, "ko");
-  let recommendations = result.results.slice(0, 8);
-  recommendations = recommendations.map((movie) => {
+export const getSimilarMovies = async (id) => {
+  const result = await getData(`movie/${id}/similar`, "ko");
+  let similarMovies = result.results.slice(0, 8);
+  similarMovies = similarMovies.map((movie) => {
     return {
       id: movie.id,
       title: movie.title,
@@ -101,7 +109,7 @@ export const getMovieRecommendations = async (id) => {
     };
   });
 
-  return recommendations;
+  return similarMovies;
 };
 
 export const getAllLikeMovies = () => {

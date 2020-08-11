@@ -17,7 +17,6 @@ const settings = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,
       },
     },
     {
@@ -25,15 +24,13 @@ const settings = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        infinite: true,
       },
     },
     {
-      breakpoint: 600,
+      breakpoint: 767,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        infinite: true,
       },
     },
   ],
@@ -46,12 +43,11 @@ function MovieCast() {
   const videos = movieDetail.videos;
 
   useEffect(() => {
-    const images = document.querySelectorAll(".thumbnail img");
-    mediumZoom(images, {
+    mediumZoom(".imgThumbnail", {
       margin: 50,
       background: "rgba(20, 20, 20, .9)",
     });
-  }, []);
+  });
 
   const changeMediaType = (e) => {
     const target = e.currentTarget;
@@ -87,16 +83,26 @@ function MovieCast() {
         {mediaType === "image"
           ? images.map((image, index) => (
               <React.Fragment key={index}>
-                <Thumbnail className="thumbnail">
-                  <img src={image} alt={`${movieDetail.title} 이미지`} />
+                <Thumbnail>
+                  <img //
+                    className="imgThumbnail"
+                    src={image}
+                    alt={`${movieDetail.title} 이미지`}
+                  />
                 </Thumbnail>
               </React.Fragment>
             ))
           : videos.map((video, index) => (
               <React.Fragment key={index}>
                 <Thumbnail>
-                  <img src={video.thumbnail} alt={`${movieDetail.title} 영상`} />
-                  <PlayBtn />
+                  <a //
+                    href={video.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={video.thumbnail} alt={`${movieDetail.title} 영상`} />
+                    <PlayBtn />
+                  </a>
                 </Thumbnail>
               </React.Fragment>
             ))}

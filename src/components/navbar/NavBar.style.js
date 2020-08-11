@@ -23,7 +23,7 @@ const Nav = styled.nav`
   padding: 20px 30px;
   height: 80px;
   width: 100%;
-  z-index: 2;
+  z-index: 4;
   & > span {
     color: white;
   }
@@ -81,7 +81,7 @@ const PageCover = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 4;
+  z-index: 6;
   display: ${(props) => (props.isMenuOpen ? "block" : "none")};
 `;
 

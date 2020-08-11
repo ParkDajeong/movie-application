@@ -18,6 +18,11 @@ const MovieCast = styled.section`
   div > button:before {
     font-size: 35px;
   }
+  .slick-track {
+    @media (min-width: 767px) {
+      margin: 0;
+    }
+  }
   div > div > div > div {
     display: flex;
     flex-direction: column;

@@ -1,32 +1,83 @@
-import * as MovieAPI from "../../lib/movieAPI";
+import * as MovieAPI from "../api/movieAPI";
+import { handleActions } from "redux-actions";
 
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
-const GET_MOVIE_INFO = "movieApp/GET_MOVIE_INFO";
-const GET_SEARCH_RESULTS = "movieApp/GET_SEARCH_RESULTS";
-const GET_LIKELIST = "movieApp/GET_LIKELIST";
+const GET_MOVIE_DETAIL = "movieApp/GET_MOVIE_DETAIL";
+
+const initialState = {
+  movies: [
+    {
+      id: "",
+      title: "",
+      vote_average: "",
+      poster_path: "",
+    },
+  ],
+  mainBanner: {
+    id: "",
+    title: "",
+    original_title: "",
+    tagline: "",
+    backdrop_path: "",
+  },
+  movieDetail: {
+    id: "",
+    title: "",
+    original_title: "",
+    overview: "",
+    genres: "",
+    runtime: "",
+    vote_average: "",
+    backdrop_path: "",
+    poster_path: "",
+    casts: [
+      {
+        character: "",
+        name: "",
+        profile_path: "",
+      },
+    ],
+    videos: [
+      {
+        url: "",
+        thumbnail: "",
+      },
+    ],
+    images: [],
+    similarMovies: [
+      {
+        id: "",
+        title: "",
+        original_title: "",
+        vote_average: "",
+        poster_path: "",
+      },
+    ],
+  },
+};
 
 export const getMovieList = async () => {
-  const data = await MovieAPI.getMovieList();
+  const result = await MovieAPI.getMovieList();
 
   return {
     type: GET_MOVIES,
-    data,
+    result,
   };
 };
 
 export const getMainBanner = async () => {
   let randomMovie = {};
-  const movieList = (await MovieAPI.getData("trending/movie/week", "ko")).results;
+  const movieList = await MovieAPI.getMovieList();
 
   while (true) {
     const randomMovieId = movieList[Math.floor(Math.random() * movieList.length)].id;
-    randomMovie = await MovieAPI.getData(`movie/${randomMovieId}`, "ko");
+    randomMovie = await MovieAPI.getMainBannerData(randomMovieId);
 
     if (randomMovie.title && randomMovie.tagline && randomMovie.backdrop_path) {
       randomMovie = {
-        data: randomMovie,
         type: GET_MAINBANNERS,
+        result: randomMovie,
       };
       break;
     }
@@ -37,69 +88,33 @@ export const getMainBanner = async () => {
 
 export const getMovieDetail = async (movieId) => {
   const info = await MovieAPI.getMovieDetail(movieId);
-  const credits = await MovieAPI.getMovieCredits(movieId);
+  const casts = await MovieAPI.getMovieCast(movieId);
   const videos = await MovieAPI.getMovieVideos(movieId);
   const images = await MovieAPI.getMovieImages(movieId);
-  const recommendations = await MovieAPI.getMovieRecommendations(movieId);
+  const similarMovies = await MovieAPI.getSimilarMovies(movieId);
 
   return {
-    type: GET_MOVIE_INFO,
-    data: { ...info, credits, videos, images, recommendations },
+    type: GET_MOVIE_DETAIL,
+    result: { ...info, casts, videos, images, similarMovies },
   };
 };
 
-export const getSearchData = async (query) => {
-  if (query === "") {
-    return {
-      type: GET_SEARCH_RESULTS,
-      result: [],
-    };
-  }
-  const result = await MovieAPI.getSearchResults(query);
+const movieReducer = handleActions(
+  {
+    [GET_MOVIES]: (state, { result: movies }) => ({
+      ...state,
+      movies,
+    }),
+    [GET_MAINBANNERS]: (state, { result: mainBanner }) => ({
+      ...state,
+      mainBanner,
+    }),
+    [GET_MOVIE_DETAIL]: (state, { result: movieDetail }) => ({
+      ...state,
+      movieDetail,
+    }),
+  },
+  initialState
+);
 
-  return {
-    type: GET_SEARCH_RESULTS,
-    result,
-  };
-};
-
-export const getLikeList = () => {
-  const result = MovieAPI.getAllLikeMovies();
-
-  return {
-    type: GET_LIKELIST,
-    result,
-  };
-};
-
-export default function (state = [], action) {
-  switch (action.type) {
-    case GET_MOVIES:
-      return {
-        ...state,
-        movies: action.data,
-      };
-    case GET_MAINBANNERS:
-      return {
-        ...state,
-        mainBanner: action.data,
-      };
-    case GET_MOVIE_INFO:
-      return {
-        ...state,
-        movieDetail: action.data,
-      };
-    case GET_SEARCH_RESULTS:
-      return {
-        ...state,
-        searchResults: action.result,
-      };
-    case GET_LIKELIST:
-      return {
-        ...state,
-        likeList: action.result,
-      };
-    default:
-      return state;
-  }
-}
+export default movieReducer;

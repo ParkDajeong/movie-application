@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import { Row } from "antd";
 
 function SearchResult({ history }) {
-  const searchResults = useSelector((state) => state.movie.searchResults);
-
-  console.log("history", history);
+  const searchResults = useSelector((state) => state.search.searchResults);
+  const likeList = useSelector((state) => state.like.likeList);
+  const likeMovieIdList = likeList.map((movie) => movie.id);
 
   return (
     <React.Fragment>
@@ -22,6 +22,7 @@ function SearchResult({ history }) {
                   title={movie.title}
                   rate={movie.vote_average}
                   poster={movie.poster_path ? movie.poster_path : null}
+                  liked={likeMovieIdList.includes(movie.id)}
                 />
               </React.Fragment>
             ))}

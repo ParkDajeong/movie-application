@@ -16,3 +16,10 @@ a {
 a:hover {
   color: white;
 }
+
+.medium-zoom-image--opened {
+  z-index: 3;
+}
+.medium-zoom-overlay {
+  z-index: 2;
+}

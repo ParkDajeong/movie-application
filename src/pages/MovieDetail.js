@@ -4,7 +4,7 @@ import { getMovieDetail } from "../store/modules/movie";
 import MovieInfo from "../components/movieDetail/MovieInfo";
 import MovieCast from "../components/movieDetail/MovieCast";
 import MovieMedia from "../components/movieDetail/MovieMedia";
-import MovieRecommendations from "../components/movieDetail/MovieRecommendations";
+import SimilarMovies from "../components/movieDetail/SimilarMovies";
 
 function MovieDetail(props) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function MovieDetail(props) {
           <MovieInfo />
           <MovieCast />
           <MovieMedia />
-          <MovieRecommendations />
+          <SimilarMovies />
         </section>
       )}
     </React.Fragment>

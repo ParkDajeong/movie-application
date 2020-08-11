@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import * as S from "./MovieInfo.style";
 import { useMediaQuery } from "react-responsive";
-import Rate from "../movieList/Rate";
+import * as S from "./MovieInfo.style";
 import { Like } from "../movieList/MovieCard.style";
-import * as MovieAPI from "../../lib/movieAPI";
+import Rate from "../movieList/Rate";
 
 function MovieInfo() {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
   const movieDetail = useSelector((state) => state.movie.movieDetail);
-  const allLikeList = MovieAPI.getAllLikeMovies();
-  const likeMovieIdList = allLikeList.map((movie) => movie.id);
-  const [isLike, setIsLike] = useState(likeMovieIdList.includes(movieDetail.id));
+  const [isLike, setIsLike] = useState(localStorage.getItem(movieDetail.id) !== null);
 
   const addLike = () => {
     const likedMovie = {
@@ -23,11 +20,9 @@ function MovieInfo() {
     localStorage.setItem(movieDetail.id, JSON.stringify(likedMovie));
   };
 
-  const removeLike = () => {
-    localStorage.removeItem(movieDetail.id);
-  };
+  const removeLike = () => localStorage.removeItem(movieDetail.id);
 
-  const toggleLikeBtn = () => {
+  const onClickLikeBtn = () => {
     isLike ? removeLike() : addLike();
     setIsLike(!isLike);
   };
@@ -36,16 +31,18 @@ function MovieInfo() {
     <S.MovieInfo>
       <S.BackgroundImg image={movieDetail.backdrop_path} />
       <S.MovieMeta mobile={isTabletOrMobile ? 1 : 0}>
-        <S.Poster>
-          <img src={movieDetail.poster_path} alt={movieDetail.title} />
-        </S.Poster>
+        {movieDetail.poster_path && (
+          <S.Poster>
+            <img src={movieDetail.poster_path} alt={movieDetail.title} />
+          </S.Poster>
+        )}
         <S.Description>
           <div>
             <S.Title>
               <h2>{movieDetail.title}</h2>
               <Like //
-                detailpage
-                onClick={toggleLikeBtn}
+                detailpage="true"
+                onClick={onClickLikeBtn}
                 liked={isLike ? 1 : 0}
                 mobile={1}
               />
@@ -54,7 +51,7 @@ function MovieInfo() {
               <span>{movieDetail.genres}</span>
               <span>{movieDetail.runtime}분</span>
             </S.InfoData>
-            <Rate detailpage rate={movieDetail.vote_average} />
+            <Rate detailpage="true" rate={movieDetail.vote_average} />
           </div>
           <p>{movieDetail.overview}</p>
         </S.Description>
