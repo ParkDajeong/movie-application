@@ -2,9 +2,9 @@ import * as MovieAPI from "../../lib/movieAPI";
 
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
-const CHANGE_LIKELIST = "movieApp/CHANGE_LIKELIST";
 const GET_MOVIE_INFO = "movieApp/GET_MOVIE_INFO";
 const GET_SEARCH_RESULTS = "movieApp/GET_SEARCH_RESULTS";
+const GET_LIKELIST = "movieApp/GET_LIKELIST";
 
 export const getMovieList = async () => {
   const data = await MovieAPI.getMovieList();
@@ -63,10 +63,12 @@ export const getSearchData = async (query) => {
   };
 };
 
-export const changeLikeList = () => {
+export const getLikeList = () => {
+  const result = MovieAPI.getAllLikeMovies();
+
   return {
-    type: CHANGE_LIKELIST, //
-    payload: localStorage.length,
+    type: GET_LIKELIST,
+    result,
   };
 };
 
@@ -92,9 +94,10 @@ export default function (state = [], action) {
         ...state,
         searchResults: action.result,
       };
-    case CHANGE_LIKELIST:
+    case GET_LIKELIST:
       return {
-        listCnt: action.payload,
+        ...state,
+        likeList: action.result,
       };
     default:
       return state;

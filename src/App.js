@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import { getLikeList } from "./store/modules/movie";
 import NavBar from "./components/navbar/NavBar";
 import Home from "./pages/Home";
 import MyMovie from "./pages/MyMovie";
@@ -9,6 +11,12 @@ import SearchResult from "./pages/SearchResult";
 import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLikeList());
+  }, []);
+
   return (
     <React.Fragment>
       <NavBar />

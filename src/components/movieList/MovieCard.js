@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { Col } from "antd";
 import { Poster, Info, Like } from "./MovieCard.style";
 import { useMediaQuery } from "react-responsive";
-import { IMAGE_BASE_URL } from "../../config/config";
 import Rate from "./Rate";
-import * as MovieAPI from "../../lib/movieAPI";
-import { changeLikeList } from "../../store/modules/movie";
-import { useDispatch } from "react-redux";
+import { getLikeList } from "../../store/modules/movie";
+import { useSelector, useDispatch } from "react-redux";
 
 function MovieCard(props) {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
-  const allLikeList = MovieAPI.getAllLikeMovies();
-  const likeMovieIdList = allLikeList.map((movie) => movie.id);
+  const likeList = useSelector((state) => state.movie.likeList);
+  const likeMovieIdList = likeList.map((movie) => movie.id);
   const [isLike, setIsLike] = useState(likeMovieIdList.includes(props.movieId));
   const dispatch = useDispatch();
 
@@ -33,8 +31,8 @@ function MovieCard(props) {
 
   const toggleLikeBtn = () => {
     isLike ? removeLike() : addLike();
-    setIsLike(!isLike);
-    props.nobanner && dispatch(changeLikeList());
+    !props.nobanner && setIsLike(!isLike);
+    props.nobanner && dispatch(getLikeList());
   };
 
   return (
