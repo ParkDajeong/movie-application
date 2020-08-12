@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { HeartFilled } from "@ant-design/icons";
 
 const GridWrapper = styled.div`
@@ -47,9 +47,11 @@ const Poster = styled.div`
 const Like = styled(HeartFilled)`
   ${(props) =>
     !props.detailpage &&
-    `position: absolute;
-    top: 0;
-    right: 0;`}
+    css`
+      position: absolute;
+      top: 0;
+      right: 0;
+    `}
 
   font-size: 2.2rem;
   padding: 15px 10px;
@@ -65,23 +67,27 @@ const Like = styled(HeartFilled)`
 const Info = styled.div`
   ${(props) =>
     props.mobile //
-      ? `bottom: 0;
-        height: auto;
-        background-color: rgb(20, 20, 20, 0.7);
-        padding: 8px 5px 12px;
-        span, div {
-          opacity: 1;
-        }
+      ? css`
+          bottom: 0;
+          height: auto;
+          background-color: rgb(20, 20, 20, 0.7);
+          padding: 8px 5px 12px;
+          span,
+          div {
+            opacity: 1;
+          }
         `
-      : `top: 0;
-        height: 100%;
-        padding: 0 5px;
-        background-color: rgb(20, 20, 20, 0);
-        transition: all 0.5s ease;
-        span, div {
-          opacity: 0;
+      : css`
+          top: 0;
+          height: 100%;
+          padding: 0 5px;
+          background-color: rgb(20, 20, 20, 0);
           transition: all 0.5s ease;
-        }
+          span,
+          div {
+            opacity: 0;
+            transition: all 0.5s ease;
+          }
         `}
   left: 0;
   width: 100%;

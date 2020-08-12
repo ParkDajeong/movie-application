@@ -4,14 +4,15 @@ import { useHistory } from "react-router-dom";
 import { getMainBanner } from "../../store/modules/movie";
 import * as S from "./MainBanner.style";
 
-function MainBanner() {
+function MainBanner({ type }) {
   const dispatch = useDispatch();
   const mainMovie = useSelector((state) => state.movie.mainBanner);
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getMainBanner());
-  }, []);
+    console.log("메인배너 타입", type);
+    dispatch(getMainBanner(type));
+  }, [type]);
 
   return (
     <React.Fragment>
@@ -34,4 +35,4 @@ function MainBanner() {
   );
 }
 
-export default MainBanner;
+export default React.memo(MainBanner);

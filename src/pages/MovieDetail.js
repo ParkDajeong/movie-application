@@ -9,21 +9,20 @@ import SimilarMovies from "../components/movieDetail/SimilarMovies";
 function MovieDetail(props) {
   const dispatch = useDispatch();
   const movieId = props.match.params.movieId;
-  const movieDetail = useSelector((state) => state.movie.movieDetail);
 
   useEffect(() => {
     dispatch(getMovieDetail(movieId));
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <React.Fragment>
-      {movieDetail && (
-        <section>
-          <MovieInfo />
-          <MovieCast />
-          <MovieMedia />
-          <SimilarMovies />
-        </section>
+      <section>
+        <MovieInfo />
+        <MovieCast />
+        <MovieMedia />
+        <SimilarMovies />
+      </section>
       )}
     </React.Fragment>
   );

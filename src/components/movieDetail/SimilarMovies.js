@@ -1,9 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { MovieMedia } from "./SimilarMovies.style";
-import { Poster, Info } from "../movieList/MovieCard.style";
-import { useMediaQuery } from "react-responsive";
-import Rate from "../movieList/Rate";
+import { SimilarSection } from "./SimilarMovies.style";
+import MovieCard from "../../components/movieList/MovieCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -42,31 +40,29 @@ const settings = {
 };
 
 function MovieCast() {
-  let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
   const similarMovies = useSelector((state) => state.movie.movieDetail.similarMovies);
 
   return (
-    <MovieMedia>
-      <h2>비슷한 영화</h2>
-      <Slider {...settings}>
-        {similarMovies.map((movie, index) => (
-          <React.Fragment key={index}>
-            <Poster>
-              <a href={`/movie/${movie.id}`}>
-                <img //
-                  src={movie.poster_path}
-                  alt={movie.title}
+    <React.Fragment>
+      {similarMovies.length > 0 && (
+        <SimilarSection>
+          <h2>비슷한 영화</h2>
+          <Slider {...settings}>
+            {similarMovies.map((movie, index) => (
+              <React.Fragment key={index}>
+                <MovieCard //
+                  id={movie.id}
+                  title={movie.title}
+                  rate={movie.vote_average}
+                  poster={movie.poster_path ? movie.poster_path : null}
+                  slider={"true"}
                 />
-                <Info mobile={isTabletOrMobile ? 1 : 0}>
-                  <span>{movie.title}</span>
-                  <Rate rate={movie.vote_average} />
-                </Info>
-              </a>
-            </Poster>
-          </React.Fragment>
-        ))}
-      </Slider>
-    </MovieMedia>
+              </React.Fragment>
+            ))}
+          </Slider>
+        </SimilarSection>
+      )}
+    </React.Fragment>
   );
 }
 

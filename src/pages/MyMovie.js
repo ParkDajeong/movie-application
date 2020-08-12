@@ -1,17 +1,22 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import MovieCard from "../components/movieList/MovieCard";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
 import { useSelector } from "react-redux";
+import { noData } from "../components/movieDetail/MovieMedia.style";
 import { Row } from "antd";
 
 function MyMovie() {
   const likeList = useSelector((state) => state.like.likeList);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Fragment>
       <GridWrapper nobanner>
         <h2>나의 영화</h2>
-        {likeList ? (
+        {likeList.length > 0 ? (
           <Row gutter={[20, 30]}>
             {likeList.map((movie, index) => (
               <Fragment key={index}>
@@ -27,7 +32,7 @@ function MyMovie() {
             ))}
           </Row>
         ) : (
-          <div>좋아요를 누른 영화가 없습니다.</div>
+          <noData>좋아요를 누른 영화가 없습니다.</noData>
         )}
       </GridWrapper>
     </Fragment>

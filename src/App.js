@@ -22,6 +22,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/list/:type" component={Home} />
         <Route exact path="/mymovie" component={MyMovie} />
         <Route exact path="/movie/:movieId" component={MovieDetail} />
         <Route exact path="/search/:query" component={SearchResult} />

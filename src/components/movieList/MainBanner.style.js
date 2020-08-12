@@ -1,27 +1,27 @@
 import styled from "styled-components";
 import { Button } from "antd";
 
-// radial-gradient(rgba(20, 20, 20, 0) 10%, rgba(20, 20, 20, 0) 10%, rgba(20, 20, 20, 0.8) 90%),
 const MainBanner = styled.article`
   position: relative;
-  background: radial-gradient(rgba(20, 20, 20, 0) 30%, rgba(20, 20, 20, 0.1) 60%, rgba(20, 20, 20, 0.7) 95%), 
-  ${(props) => props.image && `url(${props.image});`}
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: radial-gradient(rgba(20, 20, 20, 0) 30%, rgba(20, 20, 20, 0.1) 60%, rgba(20, 20, 20, 0.7) 95%),
+    ${(props) => props.image && `url(${props.image}) `} no-repeat center center;
   background-size: cover;
   width: 100%;
   height: 750px;
 `;
-
-/*background: linear-gradient(to top, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.8) 80%);
-  background: linear-gradient(to bottom, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.8) 80%); */
 
 const BannerCover = styled.div`
   width: 100%;
   height: 800px;
   top: 0;
   left: 0;
-  background: linear-gradient(to bottom, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.5) 65%, rgba(20, 20, 20, 0.75) 83%, rgba(20, 20, 20, 1) 92%);
+  background: linear-gradient(
+    /* */ to bottom,
+    rgba(20, 20, 20, 0) 0%,
+    rgba(20, 20, 20, 0.5) 65%,
+    rgba(20, 20, 20, 0.75) 83%,
+    rgba(20, 20, 20, 1) 92%
+  );
 `;
 
 const MovieDetail = styled.div`

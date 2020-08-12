@@ -1,40 +1,14 @@
 import styled from "styled-components";
 import { PlayCircleFilled } from "@ant-design/icons";
+import { Section } from "./movieDetail.common.style";
 
-const MovieMedia = styled.section`
-  position: relative;
-  color: white;
-  padding: 0 12vw;
-  margin-bottom: 10vh;
+const MediaSection = styled.section`
+  ${Section}
   h2 {
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-
     display: inline-block;
   }
-  div > button {
-    z-index: 2;
-    width: auto;
-    height: auto;
-  }
-  div > button:before {
-    font-size: 35px;
-  }
-  .slick-track {
-    margin: 0;
-  }
-  .slick-slide {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: 1199px) {
-    padding: 0 5vw;
+  .slick-list {
+    height: 100%;
   }
 `;
 
@@ -82,4 +56,10 @@ const PlayBtn = styled(PlayCircleFilled)`
   font-size: 3rem;
 `;
 
-export { MovieMedia, Menu, Thumbnail, PlayBtn };
+const NoData = styled.div`
+  font-size: 1.2em;
+  padding: 5px 8px;
+  color: #ccc;
+`;
+
+export { MediaSection, Menu, Thumbnail, PlayBtn, NoData };

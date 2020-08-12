@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import * as S from "./MovieCast.style";
+import { CastSection, CastInfo } from "./MovieCast.style";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,7 +41,7 @@ function MovieCast() {
   const casts = useSelector((state) => state.movie.movieDetail.casts);
 
   return (
-    <S.MovieCast>
+    <CastSection>
       <h2>출연</h2>
       <Slider {...settings}>
         {casts.map((cast, index) => (
@@ -51,14 +51,14 @@ function MovieCast() {
               src={cast.profile_path}
               icon={!cast.profile_path && <UserOutlined />}
             />
-            <S.CastInfo>
+            <CastInfo>
               <span>{cast.name}</span>
               <span>{cast.character}</span>
-            </S.CastInfo>
+            </CastInfo>
           </React.Fragment>
         ))}
       </Slider>
-    </S.MovieCast>
+    </CastSection>
   );
 }
 

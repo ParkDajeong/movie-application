@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { CloseOutlined } from "@ant-design/icons";
-import * as S from "./NavBar.style";
+import { Nav, LeftSection, LeftMenu, TopArrow } from "./NavBar.style";
 import Search from "./Search";
 
 function NavBar() {
   const [menuOpen, setmenuOpen] = useState(false);
   const [didScroll, setDidScroll] = useState(false);
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
+  let menuContainer = useRef(null);
 
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
@@ -18,46 +19,58 @@ function NavBar() {
         setDidScroll(false);
       }
     });
+    window.addEventListener("click", onClickOutsideHandler);
   });
 
-  const openMenu = () => setmenuOpen(!menuOpen);
+  const onClickOutsideHandler = (e) => {
+    if (menuOpen && !menuContainer.current.contains(e.target)) {
+      setmenuOpen(false);
+    }
+  };
+
+  const toggleMenu = () => setmenuOpen(!menuOpen);
 
   return (
-    <S.Nav isScroll={didScroll}>
-      <S.Logo href="/">Movies</S.Logo>
-      {!isTabletOrMobile ? (
-        <S.RightMenu>
-          <li className="search">
-            <Search />
+    <Nav isScroll={didScroll}>
+      <LeftSection mobile={isTabletOrMobile}>
+        <Link to="/">Movies</Link>
+        <LeftMenu //
+          ref={menuContainer}
+          mobile={isTabletOrMobile}
+          menuOpen={menuOpen}
+        >
+          <li //
+            className="nav_menu"
+            onClick={toggleMenu}
+          >
+            메뉴
+            <span>▼</span>
           </li>
           <li>
-            <a href="/mymovie">나의 영화</a>
+            <TopArrow />
+            <Link to="/list/trend" onClick={toggleMenu}>
+              인기순
+            </Link>
           </li>
-        </S.RightMenu>
-      ) : (
-        <React.Fragment>
-          <S.MenuIcon onClick={openMenu} />
-          {/* 모바일 뒤로가기 버튼으로도 작동하게 구현하기 */}
-          <S.PageCover //
-            onClick={openMenu}
-            isMenuOpen={menuOpen}
-          />
-          <S.MobileNav isMenuOpen={menuOpen}>
-            <S.CloseBtn>
-              <CloseOutlined onClick={openMenu} />
-            </S.CloseBtn>
-            <S.MobileRightMenu>
-              <li>
-                <Search mobile />
-              </li>
-              <li>
-                <a href="/mymovie">나의 영화</a>
-              </li>
-            </S.MobileRightMenu>
-          </S.MobileNav>
-        </React.Fragment>
-      )}
-    </S.Nav>
+          <li>
+            <Link to="/list/latest" onClick={toggleMenu}>
+              최신순
+            </Link>
+          </li>
+          <li>
+            <Link to="/list/rated" onClick={toggleMenu}>
+              평점순
+            </Link>
+          </li>
+          <li>
+            <Link to="/mymovie" onClick={toggleMenu}>
+              나의 영화
+            </Link>
+          </li>
+        </LeftMenu>
+      </LeftSection>
+      <Search />
+    </Nav>
   );
 }
 

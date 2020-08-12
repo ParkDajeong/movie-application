@@ -28,7 +28,7 @@ function MovieInfo() {
   };
 
   return (
-    <S.MovieInfo>
+    <S.InfoSection>
       <S.BackgroundImg image={movieDetail.backdrop_path} />
       <S.MovieMeta mobile={isTabletOrMobile ? 1 : 0}>
         {movieDetail.poster_path && (
@@ -56,8 +56,7 @@ function MovieInfo() {
           <p>{movieDetail.overview}</p>
         </S.Description>
       </S.MovieMeta>
-      <div></div>
-    </S.MovieInfo>
+    </S.InfoSection>
   );
 }
 

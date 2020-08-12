@@ -6,19 +6,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row } from "antd";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
 
-function Home() {
+const listType = {
+  trend: "trending/movie/week",
+  latest: "movie/now_playing",
+  rated: "movie/top_rated",
+};
+
+function Home(props) {
   const dispatch = useDispatch();
+  let type = props.match.params.type;
+  type = type ? type : "trend";
   const movieList = useSelector((state) => state.movie.movies);
   const likeList = useSelector((state) => state.like.likeList);
   const likeMovieIdList = likeList.map((movie) => movie.id);
 
   useEffect(() => {
-    dispatch(getMovieList());
-  }, []);
+    console.log(listType[type]);
+    dispatch(getMovieList(listType[type]));
+    window.scrollTo(0, 0);
+  }, [type]);
+
+  console.log("타입: ", type, " 리스트: ", movieList);
 
   return (
     <Fragment>
-      <MainBanner />
+      <MainBanner type={listType[type]} />
       <GridWrapper>
         <Row gutter={[20, 30]}>
           {movieList &&

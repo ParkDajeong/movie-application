@@ -57,8 +57,8 @@ const initialState = {
   },
 };
 
-export const getMovieList = async () => {
-  const result = await MovieAPI.getMovieList();
+export const getMovieList = async (path) => {
+  const result = await MovieAPI.getMovieList(path);
 
   return {
     type: GET_MOVIES,
@@ -66,9 +66,9 @@ export const getMovieList = async () => {
   };
 };
 
-export const getMainBanner = async () => {
+export const getMainBanner = async (path) => {
   let randomMovie = {};
-  const movieList = await MovieAPI.getMovieList();
+  const movieList = await MovieAPI.getMovieList(path);
 
   while (true) {
     const randomMovieId = movieList[Math.floor(Math.random() * movieList.length)].id;

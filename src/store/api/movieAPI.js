@@ -12,8 +12,10 @@ export const getData = async (type, language, query) => {
   return result;
 };
 
-export const getMovieList = async () => {
-  const result = (await getData("trending/movie/week", "ko")).results;
+export const getMovieList = async (path) => {
+  console.log("패쓰", path);
+  const result = (await getData(path, "ko")).results;
+  console.log(result);
   const movieList = result.map((movie) => {
     return {
       id: movie.id,
@@ -79,7 +81,7 @@ export const getMovieVideos = async (id) => {
     if (video.site === "YouTube") {
       return {
         url: `${YOUTUBE_URL}${video.key}`,
-        thumbnail: `https://img.youtube.com/vi/${video.key}/hqdefault.jpg`,
+        thumbnail: `https://img.youtube.com/vi/${video.key}/mqdefault.jpg`,
       };
     }
   });

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MovieInfo = styled.section`
+const InfoSection = styled.section`
   position: relative;
   width: 100%;
   color: white;
@@ -8,10 +8,8 @@ const MovieInfo = styled.section`
 `;
 
 const BackgroundImg = styled.div`
-  background: linear-gradient(rgba(20, 20, 20, 0.5) 0%, rgba(20, 20, 20, 0.5) 100%), 
-  ${(props) => props.image && `url(${props.image});`}
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: linear-gradient(rgba(20, 20, 20, 0.5) 0%, rgba(20, 20, 20, 0.5) 100%),
+    ${(props) => props.image && `url(${props.image}) `}no-repeat center center;
   background-size: cover;
   width: 100%;
   height: 510px;
@@ -27,6 +25,9 @@ const MovieMeta = styled.section`
   padding: 0 12vw;
   margin-top: -210px;
 
+  @media (max-width: 1400px) {
+    padding: 0 8vw;
+  }
   @media (max-width: 1199px) {
     padding: 0 5vw;
   }
@@ -47,9 +48,7 @@ const Poster = styled.div`
 `;
 
 const Description = styled.div`
-  padding-top: 40px;
-  padding-left: 30px;
-  padding-right: 15px;
+  padding: 40px 15px 0 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -92,7 +91,7 @@ const InfoData = styled.div`
 `;
 
 export {
-  MovieInfo, //
+  InfoSection, //
   BackgroundImg,
   MovieMeta,
   Poster,

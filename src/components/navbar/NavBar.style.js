@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { MenuOutlined } from "@ant-design/icons";
+import styled, { css } from "styled-components";
 
 /* Common */
 const commonUl = `
@@ -15,111 +14,103 @@ const commonFlex = `
 
 /* Desktop */
 const Nav = styled.nav`
-  background-color: ${(props) => (props.isScroll ? "rgba(20,20,20,0.95);" : "")};
-  transition: background-color 0.6s ease;
-  position: fixed;
   ${commonFlex}
   justify-content: space-between;
-  padding: 20px 30px;
-  height: 80px;
+  position: fixed;
+  background-color: ${(props) => (props.isScroll ? "rgba(20,20,20,0.95);" : "")};
+  transition: background-color 0.5s ease;
+  padding: 20px 40px;
+  height: 70px;
   width: 100%;
   z-index: 4;
-  & > span {
-    color: white;
-  }
-`;
-
-const Logo = styled.a`
-  font-size: 1.8rem;
-  font-weight: bold;
 `;
 /*color: #eeeeee;
   text-shadow: 4px 0px #939599; */
 
-const RightMenu = styled.ul`
+const LeftSection = styled.section`
+  ${(props) =>
+    !props.mobile
+      ? css`
+          ${commonFlex}
+        `
+      : css`
+          display: flex;
+          align-items: center;
+          height: 100%;
+        `}
+
+  & > a {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+`;
+
+const LeftMenu = styled.ul`
   ${commonUl}
-  ${commonFlex}
-  font-size: 1.2rem;
   color: white;
-  li {
-    ${commonFlex}
-    padding-left: 15px;
-    &:first-child {
-      font-size: 1.4rem;
-      cursor: pointer;
-      position: relative;
-    }
-    a:hover {
-      font-weight: 600;
-    }
-  }
+  font-size: 1.2em;
+  ${(props) =>
+    !props.mobile
+      ? css`
+          ${commonFlex}
+          margin-left: 15px;
+          li {
+            ${commonFlex}
+            padding-left: 18px;
+            a:hover {
+              font-weight: 600;
+            }
+          }
+          .nav_menu {
+            display: none;
+          }
+        `
+      : css`
+          flex-direction: column;
+          margin-left: 1.7rem;
+          height: 25px;
+          text-align: center;
+          li {
+          }
+          .nav_menu {
+            cursor: pointer;
+            width: ${(props) => (props.menuOpen ? "27%" : "100%")};
+            margin-bottom: 30px;
+            span {
+              font-size: small;
+            }
+            & + li {
+              border-top: 2px solid white;
+            }
+          }
+          li:not(.nav_menu) {
+            display: ${(props) => (props.menuOpen ? "" : "none")};
+            background-color: rgba(20, 20, 20, 0.9);
+            transform: translateX(-38%);
+          }
+          li > a {
+            width: 100%;
+            padding: 13px 50px;
+            display: inline-block;
+            &:hover {
+              background-color: rgba(100, 100, 100, 0.5);
+            }
+          }
+        `}
 `;
 
-/* Mobile */
-const MenuIcon = styled(MenuOutlined)`
-  font-size: 1.9rem;
-  cursor: pointer;
-`;
-
-const MobileNav = styled.div`
-  background-color: #202020;
-  width: 280px;
-  height: 100%;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  right: ${(props) => (props.isMenuOpen ? "0px" : "-282px")};
-  z-index: 10;
-  border: 1px solid #353535;
-  transition: All 0.5s ease;
-`;
-
-const PageCover = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
+const TopArrow = styled.div`
+  content: "";
+  position: absolute;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 6;
-  display: ${(props) => (props.isMenuOpen ? "block" : "none")};
+  right: 0;
+  top: -9px;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-bottom: 7px solid white;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 `;
 
-const CloseBtn = styled.div`
-  text-align: right;
-  font-size: 1.8rem;
-  span {
-    color: #595959;
-    padding: 5px;
-    cursor: pointer;
-  }
-`;
-
-const MobileRightMenu = styled.ul`
-  ${commonUl}
-  flex-direction: column;
-  font-size: 1.1rem;
-  li {
-    margin: 8px 0 15px;
-    a {
-      display: block;
-      padding: 5px 10px;
-      color: gray;
-    }
-    a:hover {
-      background-color: #131313;
-      font-weight: normal;
-    }
-  }
-`;
-
-export {
-  Nav, //
-  Logo,
-  RightMenu,
-  MobileNav,
-  CloseBtn,
-  MobileRightMenu,
-  PageCover,
-  MenuIcon,
-};
+export { Nav, LeftSection, LeftMenu, TopArrow };
