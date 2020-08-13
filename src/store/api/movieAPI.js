@@ -13,9 +13,7 @@ export const getData = async (type, language, query) => {
 };
 
 export const getMovieList = async (path) => {
-  console.log("패쓰", path);
   const result = (await getData(path, "ko")).results;
-  console.log(result);
   const movieList = result.map((movie) => {
     return {
       id: movie.id,

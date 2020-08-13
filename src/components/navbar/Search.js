@@ -1,63 +1,77 @@
-import React, { useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getSearchData } from "../../store/modules/search";
 import { SearchBox, SearchForm, SearchBtn } from "./Search.style";
-import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import queryStirng from "query-string";
+import useDebounce from "../hook/useDebouce";
 import "antd/dist/antd.css";
 
-function Search({ mobile }) {
+function Search() {
   const dispatch = useDispatch();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [searchData, setSearchData] = useState("");
+  const [checkFirst, setCheckFirst] = useState(true);
 
   let inputRef = useRef(null);
   const history = useHistory();
-  //console.log("서치", history);
+  const location = useLocation();
+  const debouncedSearchTerm = useDebounce(searchData, 500);
 
-  // const clearSearchForm = () => {
-  //   setIsSearchOpen(!isSearchOpen);
-  //   setSearchData("");
-  // };
-
-  // const closeSearch = () => {
-  //   if (!history.location.pathname.includes("search")) {
-  //     clearSearchForm();
-  //   }
-  // };
-
-  // const clickCloseBtn = () => {
-  //   clearSearchForm();
-  //   if (history.location.pathname.includes("search")) {
-  //     history.push("/");
-  //   }
-  // };
-
-  // const showSearchForm = () => {
-  //   setIsSearchOpen(!isSearchOpen);
-  //   inputRef.current.focus();
-  // };
-
-  // const startSearching = () => {
-  //   dispatch(getSearchData(searchData));
-  //   history.push(`/search/${searchData}`);
-  // };
   const openSearchBox = () => {
-    setIsSearchOpen(true);
+    setIsSearching(true);
     inputRef.current.focus();
   };
 
   const closeSearchBox = () => {
-    setIsSearchOpen(false);
+    const { pathname } = location;
+    const { q: data } = queryStirng.parse(location.search);
+    if (pathname.includes("search") && data) {
+      setIsSearching(true);
+      return;
+    }
+    setIsSearching(false);
     setSearchData("");
   };
 
   const toggleSearchBtn = () => {
-    !isSearchOpen ? openSearchBox() : closeSearchBox();
+    !isSearching ? openSearchBox() : closeSearchBox();
   };
 
-  //if (!mobile) {
+  useEffect(() => {
+    const { search } = location;
+    const { q: data } = queryStirng.parse(search);
+
+    if (data) {
+      openSearchBox();
+      setSearchData(data);
+      dispatch(getSearchData(data));
+    } else {
+      history.push("/");
+      setIsSearching(false);
+      closeSearchBox();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (debouncedSearchTerm === "") {
+      history.goBack();
+      setCheckFirst(true);
+    }
+
+    if (debouncedSearchTerm) {
+      const path = `/search?q=${searchData}`;
+      if (checkFirst) {
+        history.push(path);
+        setCheckFirst(false);
+      } else {
+        history.replace(path);
+      }
+    }
+    dispatch(getSearchData(debouncedSearchTerm));
+  }, [debouncedSearchTerm]);
+
   return (
     <SearchBox onBlur={toggleSearchBtn}>
       <SearchForm //
@@ -65,34 +79,17 @@ function Search({ mobile }) {
         value={searchData}
         placeholder="Search"
         prefix={<SearchOutlined />}
-        searchopen={isSearchOpen ? 1 : 0}
-        //={startSearching}
+        searchopen={isSearching ? 1 : 0}
         onChange={(e) => setSearchData(e.target.value)}
       />
       <SearchBtn //
-        searchopen={isSearchOpen ? 1 : 0}
+        searchopen={isSearching ? 1 : 0}
         onClick={toggleSearchBtn}
       >
         <SearchOutlined />
       </SearchBtn>
     </SearchBox>
   );
-  // } else {
-  //   return (
-  //     <React.Fragment>
-  //       <Input //
-  //         ref={inputRef}
-  //         value={searchData}
-  //         size="large"
-  //         placeholder="Search"
-  //         prefix={<SearchOutlined />}
-  //         searchopen={isSearchOpen ? 1 : 0}
-  //         onPressEnter={startSearching}
-  //         onChange={(e) => setSearchData(e.target.value)}
-  //       />
-  //     </React.Fragment>
-  //   );
-  // }
 }
 
 export default Search;

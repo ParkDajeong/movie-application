@@ -1,11 +1,13 @@
 import * as MovieAPI from "../api/movieAPI";
-import { handleActions } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 
+const GET_LISTTYPE = "movieApp/LISTTYPE";
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
 const GET_MOVIE_DETAIL = "movieApp/GET_MOVIE_DETAIL";
 
 const initialState = {
+  listType: "",
   movies: [
     {
       id: "",
@@ -57,6 +59,8 @@ const initialState = {
   },
 };
 
+export const getListType = createAction(GET_LISTTYPE);
+
 export const getMovieList = async (path) => {
   const result = await MovieAPI.getMovieList(path);
 
@@ -101,6 +105,10 @@ export const getMovieDetail = async (movieId) => {
 
 const movieReducer = handleActions(
   {
+    [GET_LISTTYPE]: (state, { payload: listType }) => ({
+      ...state,
+      listType,
+    }),
     [GET_MOVIES]: (state, { result: movies }) => ({
       ...state,
       movies,

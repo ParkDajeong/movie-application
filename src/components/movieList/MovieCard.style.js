@@ -8,7 +8,7 @@ const GridWrapper = styled.div`
   ${(props) => props.nobanner && "padding-top: 100px; margin-top: 0;"}
   h2 {
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 600;
     border-bottom: 1px solid #eee;
     padding: 0 15px 15px;

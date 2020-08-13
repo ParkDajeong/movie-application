@@ -13,7 +13,7 @@ function NavBar() {
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
       const scrollTop = e.srcElement.scrollingElement.scrollTop;
-      if (scrollTop >= 80) {
+      if (scrollTop >= 50) {
         setDidScroll(true);
       } else {
         setDidScroll(false);
@@ -48,13 +48,13 @@ function NavBar() {
           </li>
           <li>
             <TopArrow />
-            <Link to="/list/trend" onClick={toggleMenu}>
-              인기순
+            <Link to="/list/latest" onClick={toggleMenu}>
+              최신순
             </Link>
           </li>
           <li>
-            <Link to="/list/latest" onClick={toggleMenu}>
-              최신순
+            <Link to="/list/trend" onClick={toggleMenu}>
+              인기순
             </Link>
           </li>
           <li>

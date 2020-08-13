@@ -18,7 +18,7 @@ const Nav = styled.nav`
   justify-content: space-between;
   position: fixed;
   background-color: ${(props) => (props.isScroll ? "rgba(20,20,20,0.95);" : "")};
-  transition: background-color 0.5s ease;
+  transition: background-color 0.3s linear;
   padding: 20px 40px;
   height: 70px;
   width: 100%;

@@ -10,7 +10,6 @@ function MainBanner({ type }) {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("메인배너 타입", type);
     dispatch(getMainBanner(type));
   }, [type]);
 
