@@ -5,7 +5,7 @@ import { Nav, LeftSection, LeftMenu, TopArrow } from "./NavBar.style";
 import Search from "./Search";
 
 function NavBar() {
-  const [menuOpen, setmenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [didScroll, setDidScroll] = useState(false);
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
   let menuContainer = useRef(null);
@@ -23,12 +23,15 @@ function NavBar() {
   });
 
   const onClickOutsideHandler = (e) => {
-    if (menuOpen && !menuContainer.current.contains(e.target)) {
-      setmenuOpen(false);
+    if (mobileMenuOpen && !menuContainer.current.contains(e.target)) {
+      setMobileMenuOpen(false);
     }
   };
 
-  const toggleMenu = () => setmenuOpen(!menuOpen);
+  const onToggleMobileMenu = () => {
+    if (!isTabletOrMobile) return;
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
     <Nav isScroll={didScroll}>
@@ -37,33 +40,33 @@ function NavBar() {
         <LeftMenu //
           ref={menuContainer}
           mobile={isTabletOrMobile}
-          menuOpen={menuOpen}
+          menuOpen={mobileMenuOpen}
         >
           <li //
             className="nav_menu"
-            onClick={toggleMenu}
+            onClick={onToggleMobileMenu}
           >
             메뉴
             <span>▼</span>
           </li>
           <li>
             <TopArrow />
-            <Link to="/list/latest" onClick={toggleMenu}>
+            <Link to="/list/latest" onClick={onToggleMobileMenu}>
               최신순
             </Link>
           </li>
           <li>
-            <Link to="/list/trend" onClick={toggleMenu}>
+            <Link to="/list/trend" onClick={onToggleMobileMenu}>
               인기순
             </Link>
           </li>
           <li>
-            <Link to="/list/rated" onClick={toggleMenu}>
+            <Link to="/list/rated" onClick={onToggleMobileMenu}>
               평점순
             </Link>
           </li>
           <li>
-            <Link to="/mymovie" onClick={toggleMenu}>
+            <Link to="/mymovie" onClick={onToggleMobileMenu}>
               나의 영화
             </Link>
           </li>
@@ -74,4 +77,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default React.memo(NavBar);

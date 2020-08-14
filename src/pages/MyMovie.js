@@ -18,17 +18,17 @@ function MyMovie() {
         <h2>나의 영화</h2>
         {likeListSuccess ? (
           <Row gutter={[20, 30]}>
-            {likeList.map((movie, index) => (
-              <Fragment key={index}>
-                <MovieCard //
-                  movieId={movie.id}
-                  title={movie.title}
-                  rate={movie.rate}
-                  poster={movie.poster ? movie.poster : null}
-                  liked={true}
-                  nobanner
-                />
-              </Fragment>
+            {likeList.map((movie) => (
+              <MovieCard //
+                key={movie.id}
+                movieId={movie.id}
+                title={movie.title}
+                rate={movie.rate}
+                poster={movie.poster ? movie.poster : null}
+                liked={true}
+                nobanner
+                mymovie
+              />
             ))}
           </Row>
         ) : (

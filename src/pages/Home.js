@@ -4,8 +4,8 @@ import MainBanner from "../components/movieList/MainBanner";
 import { getMovieList } from "../store/modules/movie";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { Row } from "antd";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
+import { Row } from "antd";
 
 const listType = {
   trend: "trending/movie/week",
@@ -13,17 +13,16 @@ const listType = {
   rated: "movie/top_rated",
 };
 
-function Home(props) {
+function Home({ match }) {
   const dispatch = useDispatch();
-  let type = props.match.params.type;
+  const location = useLocation();
+  let type = match.params.type;
   type = type ? type : "trend";
   const { moviesSuccess, result: movieList } = useSelector((state) => state.movie.movies);
   const { searchSuccess, result: searchResults } = useSelector((state) => state.search.searchResults);
-  const { result: likeList } = useSelector((state) => state.like.likeList);
+  const likeList = useSelector((state) => state.like.likeList.result);
   const likeMovieIdList = likeList.map((movie) => movie.id);
   const [isSearching, setIsSearching] = useState(false);
-
-  const location = useLocation();
 
   useEffect(() => {
     const { pathname } = location;
@@ -91,4 +90,4 @@ function Home(props) {
   }
 }
 
-export default Home;
+export default React.memo(Home);

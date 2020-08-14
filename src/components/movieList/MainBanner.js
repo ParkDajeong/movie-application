@@ -13,6 +13,8 @@ function MainBanner({ type }) {
     dispatch(getMainBanner(type));
   }, [type]);
 
+  const onClickMoreBtn = () => history.push(`/movie/${mainMovie.id}`);
+
   return (
     <React.Fragment>
       <S.MainBanner image={mainMovie.backdrop_path}>
@@ -22,7 +24,7 @@ function MainBanner({ type }) {
           <h2>{mainMovie.title}</h2>
           <p>{mainMovie.tagline}</p>
           <S.MoreBtn //
-            onClick={() => history.push(`/movie/${mainMovie.id}`)}
+            onClick={onClickMoreBtn}
           >
             자세히 보기
           </S.MoreBtn>

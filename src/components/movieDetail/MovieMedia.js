@@ -38,7 +38,7 @@ const settings = {
 
 function MovieCast() {
   const [mediaType, setMediaType] = useState("image");
-  const { result: movieDetail } = useSelector((state) => state.movie.movieDetail);
+  const movieDetail = useSelector((state) => state.movie.movieDetail.result);
   const images = movieDetail.images;
   const videos = movieDetail.videos;
 

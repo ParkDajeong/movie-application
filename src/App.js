@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { getLikeList } from "./store/modules/like";
 import NavBar from "./components/navbar/NavBar";
 import Home from "./pages/Home";
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;

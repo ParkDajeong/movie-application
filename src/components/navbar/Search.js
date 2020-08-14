@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import queryStirng from "query-string";
 import { getSearchData } from "../../store/modules/search";
 import { SearchBox, SearchForm, SearchBtn } from "./Search.style";
 import { SearchOutlined } from "@ant-design/icons";
-import queryStirng from "query-string";
-import useDebounce from "../../hook/useDebouce";
+import useDebounce from "../../hooks/useDebouce";
 import "antd/dist/antd.css";
 
 function Search() {
@@ -18,26 +18,6 @@ function Search() {
   const history = useHistory();
   const location = useLocation();
   const debouncedSearchTerm = useDebounce(searchData, 800);
-
-  const openSearchBox = () => {
-    setIsSearching(true);
-    inputRef.current.focus();
-  };
-
-  const closeSearchBox = () => {
-    const { pathname } = location;
-    const { q: data } = queryStirng.parse(location.search);
-    if (pathname.includes("search") && data) {
-      setIsSearching(true);
-      return;
-    }
-    setIsSearching(false);
-    setSearchData("");
-  };
-
-  const toggleSearchBtn = () => {
-    !isSearching ? openSearchBox() : closeSearchBox();
-  };
 
   useEffect(() => {
     const { search } = location;
@@ -79,6 +59,26 @@ function Search() {
     }
   }, [location.pathname]);
 
+  const openSearchBox = () => {
+    setIsSearching(true);
+    inputRef.current.focus();
+  };
+
+  const closeSearchBox = () => {
+    const { pathname } = location;
+    const { q: data } = queryStirng.parse(location.search);
+    if (pathname.includes("search") && data) {
+      setIsSearching(true);
+      return;
+    }
+    setIsSearching(false);
+    setSearchData("");
+  };
+
+  const toggleSearchBtn = () => {
+    !isSearching ? openSearchBox() : closeSearchBox();
+  };
+
   return (
     <SearchBox onBlur={toggleSearchBtn}>
       <SearchForm //
@@ -99,4 +99,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default React.memo(Search);

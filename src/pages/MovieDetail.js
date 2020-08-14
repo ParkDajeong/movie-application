@@ -5,7 +5,6 @@ import MovieInfo from "../components/movieDetail/MovieInfo";
 import MovieCast from "../components/movieDetail/MovieCast";
 import MovieMedia from "../components/movieDetail/MovieMedia";
 import SimilarMovies from "../components/movieDetail/SimilarMovies";
-
 import { WaveTopBottomLoading } from "react-loadingg";
 
 function MovieDetail({ match }) {
