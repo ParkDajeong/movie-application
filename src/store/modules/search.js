@@ -4,34 +4,40 @@ import { handleActions } from "redux-actions";
 const GET_SEARCH_RESULTS = "movieApp/GET_SEARCH_RESULTS";
 
 const initialState = {
-  searchResults: [
-    {
-      id: "",
-      title: "",
-      vote_average: "",
-      poster_path: "",
-    },
-  ],
+  searchResults: {
+    searchSuccess: false,
+    result: [
+      {
+        id: "",
+        title: "",
+        vote_average: "",
+        poster_path: "",
+      },
+    ],
+  },
 };
 
 export const getSearchData = async (query) => {
   if (query === "") {
     return {
       type: GET_SEARCH_RESULTS,
-      result: initialState.searchResults,
+      searchResults: initialState.searchResults,
     };
   }
   const result = await MovieAPI.getSearchResults(query);
 
   return {
     type: GET_SEARCH_RESULTS,
-    result,
+    searchResults: {
+      searchSuccess: true,
+      result,
+    },
   };
 };
 
 const searchReducer = handleActions(
   {
-    [GET_SEARCH_RESULTS]: (state, { result: searchResults }) => ({
+    [GET_SEARCH_RESULTS]: (state, { searchResults }) => ({
       ...state,
       searchResults,
     }),

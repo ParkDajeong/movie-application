@@ -46,4 +46,4 @@ const FrontStars = styled.div`
   transition: all 0.5s;
 `;
 
-export default Rate;
+export default React.memo(Rate);

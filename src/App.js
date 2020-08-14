@@ -6,7 +6,6 @@ import NavBar from "./components/navbar/NavBar";
 import Home from "./pages/Home";
 import MyMovie from "./pages/MyMovie";
 import MovieDetail from "./pages/MovieDetail";
-
 import "./App.css";
 
 function App() {

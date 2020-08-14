@@ -18,12 +18,11 @@ const GridWrapper = styled.div`
 
 const Poster = styled.div`
   position: relative;
-  height: ${(props) => (props.mobile ? "40em" : "100%")};
+  height: 100%;
   img {
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    background-color: #eee;
   }
   &:hover {
     & > span {

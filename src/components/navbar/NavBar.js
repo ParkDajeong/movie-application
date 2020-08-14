@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { Nav, LeftSection, LeftMenu, TopArrow } from "./NavBar.style";
 import Search from "./Search";

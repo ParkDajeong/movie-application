@@ -38,14 +38,14 @@ const settings = {
 };
 
 function MovieCast() {
-  const casts = useSelector((state) => state.movie.movieDetail.casts);
+  const casts = useSelector((state) => state.movie.movieDetail.result.casts);
 
   return (
     <CastSection>
       <h2>출연</h2>
       <Slider {...settings}>
-        {casts.map((cast, index) => (
-          <React.Fragment key={index}>
+        {casts.map((cast) => (
+          <React.Fragment key={cast.cast_id}>
             <Avatar //
               size={150}
               src={cast.profile_path}

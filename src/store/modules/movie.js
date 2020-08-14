@@ -1,65 +1,72 @@
 import * as MovieAPI from "../api/movieAPI";
-import { createAction, handleActions } from "redux-actions";
+import { handleActions } from "redux-actions";
 
-const GET_LISTTYPE = "movieApp/LISTTYPE";
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
 const GET_MOVIE_DETAIL = "movieApp/GET_MOVIE_DETAIL";
+//const CHANGE_DETAIL_STATE = "movieApp/GET_MOVIE_DETAIL";
 
 const initialState = {
-  listType: "",
-  movies: [
-    {
-      id: "",
-      title: "",
-      vote_average: "",
-      poster_path: "",
-    },
-  ],
-  mainBanner: {
-    id: "",
-    title: "",
-    original_title: "",
-    tagline: "",
-    backdrop_path: "",
-  },
-  movieDetail: {
-    id: "",
-    title: "",
-    original_title: "",
-    overview: "",
-    genres: "",
-    runtime: "",
-    vote_average: "",
-    backdrop_path: "",
-    poster_path: "",
-    casts: [
-      {
-        character: "",
-        name: "",
-        profile_path: "",
-      },
-    ],
-    videos: [
-      {
-        url: "",
-        thumbnail: "",
-      },
-    ],
-    images: [],
-    similarMovies: [
+  movies: {
+    moviesSuccess: false,
+    result: [
       {
         id: "",
         title: "",
-        original_title: "",
         vote_average: "",
         poster_path: "",
       },
     ],
   },
+  mainBanner: {
+    bannerSuccess: false,
+    result: {
+      id: "",
+      title: "",
+      original_title: "",
+      tagline: "",
+      backdrop_path: "",
+    },
+  },
+  movieDetail: {
+    detailSuccess: false,
+    result: {
+      id: "",
+      title: "",
+      original_title: "",
+      overview: "",
+      genres: "",
+      runtime: "",
+      vote_average: "",
+      backdrop_path: "",
+      poster_path: "",
+      casts: [
+        {
+          cast_id: "",
+          character: "",
+          name: "",
+          profile_path: "",
+        },
+      ],
+      videos: [
+        {
+          url: "",
+          thumbnail: "",
+        },
+      ],
+      images: [],
+      similarMovies: [
+        {
+          id: "",
+          title: "",
+          original_title: "",
+          vote_average: "",
+          poster_path: "",
+        },
+      ],
+    },
+  },
 };
-
-export const getListType = createAction(GET_LISTTYPE);
 
 export const getMovieList = async (path) => {
   const result = await MovieAPI.getMovieList(path);
@@ -105,21 +112,26 @@ export const getMovieDetail = async (movieId) => {
 
 const movieReducer = handleActions(
   {
-    [GET_LISTTYPE]: (state, { payload: listType }) => ({
+    [GET_MOVIES]: (state, { result }) => ({
       ...state,
-      listType,
+      movies: {
+        moviesSuccess: true,
+        result,
+      },
     }),
-    [GET_MOVIES]: (state, { result: movies }) => ({
+    [GET_MAINBANNERS]: (state, { result }) => ({
       ...state,
-      movies,
+      mainBanner: {
+        bannerSuccess: true,
+        result,
+      },
     }),
-    [GET_MAINBANNERS]: (state, { result: mainBanner }) => ({
+    [GET_MOVIE_DETAIL]: (state, { result }) => ({
       ...state,
-      mainBanner,
-    }),
-    [GET_MOVIE_DETAIL]: (state, { result: movieDetail }) => ({
-      ...state,
-      movieDetail,
+      movieDetail: {
+        detailSuccess: true,
+        result,
+      },
     }),
   },
   initialState

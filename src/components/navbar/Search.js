@@ -5,7 +5,7 @@ import { getSearchData } from "../../store/modules/search";
 import { SearchBox, SearchForm, SearchBtn } from "./Search.style";
 import { SearchOutlined } from "@ant-design/icons";
 import queryStirng from "query-string";
-import useDebounce from "../hook/useDebouce";
+import useDebounce from "../../hook/useDebouce";
 import "antd/dist/antd.css";
 
 function Search() {
@@ -17,7 +17,7 @@ function Search() {
   let inputRef = useRef(null);
   const history = useHistory();
   const location = useLocation();
-  const debouncedSearchTerm = useDebounce(searchData, 500);
+  const debouncedSearchTerm = useDebounce(searchData, 800);
 
   const openSearchBox = () => {
     setIsSearching(true);
@@ -55,7 +55,7 @@ function Search() {
   }, []);
 
   useEffect(() => {
-    if (debouncedSearchTerm === "") {
+    if (debouncedSearchTerm === "" && !checkFirst) {
       history.goBack();
       setCheckFirst(true);
     }
@@ -71,6 +71,13 @@ function Search() {
     }
     dispatch(getSearchData(debouncedSearchTerm));
   }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    if (!location.pathname.includes("search")) {
+      closeSearchBox();
+      setCheckFirst(true);
+    }
+  }, [location.pathname]);
 
   return (
     <SearchBox onBlur={toggleSearchBtn}>

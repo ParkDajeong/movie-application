@@ -7,7 +7,7 @@ import Rate from "../movieList/Rate";
 
 function MovieInfo() {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
-  const movieDetail = useSelector((state) => state.movie.movieDetail);
+  const movieDetail = useSelector((state) => state.movie.movieDetail.result);
   const [isLike, setIsLike] = useState(localStorage.getItem(movieDetail.id) !== null);
 
   const addLike = () => {
@@ -60,4 +60,4 @@ function MovieInfo() {
   );
 }
 
-export default MovieInfo;
+export default React.memo(MovieInfo);

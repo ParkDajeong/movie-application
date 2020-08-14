@@ -40,7 +40,7 @@ const settings = {
 };
 
 function MovieCast() {
-  const similarMovies = useSelector((state) => state.movie.movieDetail.similarMovies);
+  const similarMovies = useSelector((state) => state.movie.movieDetail.result.similarMovies);
 
   return (
     <React.Fragment>
@@ -48,16 +48,15 @@ function MovieCast() {
         <SimilarSection>
           <h2>비슷한 영화</h2>
           <Slider {...settings}>
-            {similarMovies.map((movie, index) => (
-              <React.Fragment key={index}>
-                <MovieCard //
-                  id={movie.id}
-                  title={movie.title}
-                  rate={movie.vote_average}
-                  poster={movie.poster_path ? movie.poster_path : null}
-                  slider={"true"}
-                />
-              </React.Fragment>
+            {similarMovies.map((movie) => (
+              <MovieCard //
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                rate={movie.vote_average}
+                poster={movie.poster_path ? movie.poster_path : null}
+                slider={"true"}
+              />
             ))}
           </Slider>
         </SimilarSection>

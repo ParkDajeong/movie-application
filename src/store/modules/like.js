@@ -4,14 +4,17 @@ import { handleActions } from "redux-actions";
 const GET_LIKELIST = "movieApp/GET_LIKELIST";
 
 const initialState = {
-  likeList: [
-    {
-      id: "",
-      title: "",
-      rate: "",
-      poster: "",
-    },
-  ],
+  likeList: {
+    likeListSuccess: false,
+    result: [
+      {
+        id: "",
+        title: "",
+        rate: "",
+        poster: "",
+      },
+    ],
+  },
 };
 
 export const getLikeList = () => {
@@ -25,9 +28,12 @@ export const getLikeList = () => {
 
 const likeReducer = handleActions(
   {
-    [GET_LIKELIST]: (state, { result: likeList }) => ({
+    [GET_LIKELIST]: (state, { result }) => ({
       ...state,
-      likeList,
+      likeList: {
+        likeListSuccess: true,
+        result,
+      },
     }),
   },
   initialState

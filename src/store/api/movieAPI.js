@@ -7,7 +7,8 @@ export const getData = async (type, language, query) => {
   const path = `${API_URL}${type}?api_key=${API_KEY}${ko}${queryStr}`;
   const result = await axios
     .get(path) //
-    .then((response) => response.data);
+    .then((response) => response.data)
+    .catch((err) => console.log(err));
 
   return result;
 };
@@ -62,6 +63,7 @@ export const getMovieCast = async (id) => {
   let casts = result.cast.slice(0, 10);
   casts = casts.map((cast) => {
     return {
+      cast_id: cast.id,
       character: cast.character,
       name: cast.name,
       profile_path: cast.profile_path //

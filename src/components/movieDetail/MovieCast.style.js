@@ -3,7 +3,9 @@ import { Section } from "./movieDetail.common.style";
 
 const CastSection = styled.section`
   ${Section}
-  text-align: center;
+  .slick-list {
+    text-align: center;
+  }
   .slick-track {
     @media (min-width: 767px) {
       margin: 0;

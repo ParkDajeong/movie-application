@@ -60,6 +60,7 @@ const Description = styled.div`
     font-size: 1.15rem;
     margin-top: 55px;
     padding: 5px;
+    overflow: auto;
   }
 
   @media (max-width: 1199px) {

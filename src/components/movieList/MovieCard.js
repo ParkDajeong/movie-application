@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import Rate from "./Rate";
 import { getLikeList } from "../../store/modules/like";
 import { useDispatch } from "react-redux";
-import notFound from "../../images/notFound.png";
+import noPoster from "../../images/no-poster.png";
 
 function MovieCard(props) {
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
@@ -44,7 +44,7 @@ function MovieCard(props) {
         >
           <Link to={`/movie/${props.movieId}`}>
             <img //
-              src={props.poster ? props.poster : notFound}
+              src={props.poster ? props.poster : noPoster}
               alt={props.title}
             />
             <Info mobile={isTabletOrMobile ? 1 : 0}>
@@ -63,16 +63,16 @@ function MovieCard(props) {
   } else {
     return (
       <Poster>
-        <a href={`/movie/${props.id}`}>
+        <Link to={`/movie/${props.id}`}>
           <img //
-            src={props.poster ? props.poster : notFound}
+            src={props.poster ? props.poster : noPoster}
             alt={props.title}
           />
           <Info mobile={isTabletOrMobile ? 1 : 0}>
             <span>{props.title}</span>
             <Rate rate={props.rate} />
           </Info>
-        </a>
+        </Link>
       </Poster>
     );
   }

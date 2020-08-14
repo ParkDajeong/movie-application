@@ -17,9 +17,9 @@ function Home(props) {
   const dispatch = useDispatch();
   let type = props.match.params.type;
   type = type ? type : "trend";
-  const movieList = useSelector((state) => state.movie.movies);
-  const searchResults = useSelector((state) => state.search.searchResults);
-  const likeList = useSelector((state) => state.like.likeList);
+  const { moviesSuccess, result: movieList } = useSelector((state) => state.movie.movies);
+  const { searchSuccess, result: searchResults } = useSelector((state) => state.search.searchResults);
+  const { result: likeList } = useSelector((state) => state.like.likeList);
   const likeMovieIdList = likeList.map((movie) => movie.id);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -43,46 +43,50 @@ function Home(props) {
   if (!isSearching) {
     return (
       <Fragment>
-        <MainBanner type={listType[type]} />
-        <GridWrapper>
-          <Row gutter={[20, 30]}>
-            {movieList &&
-              movieList.map((movie, index) => (
-                <Fragment key={index}>
+        {moviesSuccess && (
+          <Fragment>
+            <MainBanner type={listType[type]} />
+            <GridWrapper>
+              <Row gutter={[20, 30]}>
+                {movieList.map((movie) => (
                   <MovieCard //
+                    key={movie.id}
                     movieId={movie.id}
                     title={movie.title}
                     rate={movie.vote_average}
                     poster={movie.poster_path ? movie.poster_path : null}
                     liked={likeMovieIdList.includes(movie.id)}
                   />
-                </Fragment>
-              ))}
-          </Row>
-        </GridWrapper>
+                ))}
+              </Row>
+            </GridWrapper>
+          </Fragment>
+        )}
       </Fragment>
     );
   } else {
     return (
-      <React.Fragment>
-        <GridWrapper nobanner>
-          <Row gutter={[20, 30]}>
-            {searchResults &&
-              searchResults.map((movie, index) => (
-                <React.Fragment key={index}>
+      <Fragment>
+        {searchSuccess && (
+          <Fragment>
+            <GridWrapper nobanner>
+              <Row gutter={[20, 30]}>
+                {searchResults.map((movie) => (
                   <MovieCard //
                     nobanner
+                    key={movie.id}
                     movieId={movie.id}
                     title={movie.title}
                     rate={movie.vote_average}
                     poster={movie.poster_path ? movie.poster_path : null}
                     liked={likeMovieIdList.includes(movie.id)}
                   />
-                </React.Fragment>
-              ))}
-          </Row>
-        </GridWrapper>
-      </React.Fragment>
+                ))}
+              </Row>
+            </GridWrapper>
+          </Fragment>
+        )}
+      </Fragment>
     );
   }
 }
