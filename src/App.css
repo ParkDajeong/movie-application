@@ -1,7 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@font-face {
+  font-family: "나눔바른고딕";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: local("나눔바른고딕"), local("NanumBarunGothic"), local("나눔바른고딕OTF"), local("NanumBarunGothicOTF"), local("애플 SD 산돌고딕 Neo"),
+    local("Apple SD Gothic Neo"), local("Noto Sans"), local("Noto+Sans"), local("notokr-demilight"), local("나눔고딕"), local("NanumGothic"),
+    local("맑은 고딕"), local("Malgun Gothic");
+  src: url("https://puripia.com/Font/nanumbarungothicregular.eot"); /*For IE6~8*/
+  src: local(☺), url("https://puripia.com/Font/nanumbarungothicregular.eot?#iefix") format("embedded-opentype"),
+    url("https://puripia.com/font/nanumbarungothicregular.woff2") format("woff2"),
+    url("https://puripia.com/font/nanumbarungothicregular.woff") format("woff"),
+    url("https://puripia.com/font/nanumbarungothicregular.ttf") format("truetype"), url("https://puripia.com/Font/notokr-demilight.svg") format("svg");
+}
 
 html,
 body {
+  font-family: "애플 SD 산돌고딕 Neo", "Apple SD Gothic Neo", "Helvetica Neue", "Helvetica", "나눔바른고딕", "NanumBarunGothic", "나눔바른고딕OTF",
+    "NanumBarunGothicOTF", "Noto Sans", "Noto+Sans", "notokr-demilight", "나눔고딕", "NanumGothic", "맑은 고딕", "Malgun Gothic", "sans-serif" !important;
   margin: 0;
   padding: 0;
   font-family: "Noto Sans KR", sans-serif;

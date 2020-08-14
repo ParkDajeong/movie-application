@@ -32,9 +32,6 @@ const Section = css`
   @media (max-width: 1400px) {
     padding: 0 8vw;
   }
-  @media (max-width: 1199px) {
-    padding: 0 5vw;
-  }
 `;
 
 export { Section };

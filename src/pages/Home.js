@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import MovieCard from "../components/movieList/MovieCard";
 import MainBanner from "../components/movieList/MainBanner";
 import { getMovieList } from "../store/modules/movie";
+import { getLikeList } from "../store/modules/like";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
@@ -37,6 +38,8 @@ function Home({ match }) {
   useEffect(() => {
     dispatch(getMovieList(listType[type]));
     window.scrollTo(0, 0);
+
+    return () => dispatch(getLikeList());
   }, [type]);
 
   if (!isSearching) {

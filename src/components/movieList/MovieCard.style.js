@@ -14,6 +14,11 @@ const GridWrapper = styled.div`
     padding: 0 15px 15px;
     margin-bottom: 30px;
   }
+
+  @media (max-width: 960px) {
+    padding: 30px 30px 10px;
+    ${(props) => props.nobanner && "padding-top: 100px; margin-top: 0;"}
+  }
 `;
 
 const Poster = styled.div`

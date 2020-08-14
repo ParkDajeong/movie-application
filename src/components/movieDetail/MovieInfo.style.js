@@ -72,13 +72,19 @@ const Description = styled.div`
       margin-top: 15px;
     }
   }
+
+  @media (max-width: 960px) {
+    p {
+      height: 250px;
+    }
+  }
 `;
 
 const Title = styled.div`
   h2 {
     display: inline-block;
     color: white;
-    font-size: 2.4rem;
+    font-size: 2.4em;
     font-weight: bold;
     margin-bottom: 13px;
   }

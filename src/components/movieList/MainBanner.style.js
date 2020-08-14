@@ -42,6 +42,10 @@ const MovieDetail = styled.div`
     padding-left: 2px;
     font-size: 1.3rem;
   }
+
+  @media (max-width: 960px) {
+    padding: 10px 30px 60px;
+  }
 `;
 
 const MoreBtn = styled(Button)`

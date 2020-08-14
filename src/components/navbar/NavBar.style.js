@@ -23,6 +23,10 @@ const Nav = styled.nav`
   height: 70px;
   width: 100%;
   z-index: 4;
+
+  @media (max-width: 960px) {
+    padding: 20px;
+  }
 `;
 /*color: #eeeeee;
   text-shadow: 4px 0px #939599; */
