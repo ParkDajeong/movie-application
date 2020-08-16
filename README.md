@@ -2,15 +2,15 @@
 
 ## 프로젝트 소개
 
-The Movie DB API를 이용한 영화 정보 사이트.
-최신 영화, 혹은 인기있는 영화의 줄거리, 캐스트, 평점 등 관련 정보를 제공하며, 검색을 통해 원하는 영화의 정보를 찾아볼 수 있습니다.
+The Movie DB API를 이용한 영화 정보 사이트.  
+최신 영화, 혹은 인기있는 영화의 줄거리, 캐스트, 평점 등 관련 정보를 제공하며, 검색을 통해 원하는 영화의 정보를 찾아볼 수 있습니다.  
 또한 마음의 드는 영화를 찜하여 따로 모아 볼 수 있습니다.
 
 링크: [MOVIE][https://parkdajeong.github.io/movie-application/]
 
 ## 사이트 화면
 
-1. Home
+1. Home  
    <img
      src="https://user-images.githubusercontent.com/43628429/90332181-e9c1df80-dff5-11ea-8435-4847250597c0.PNG"
      width="80%" height="auto" alt="Home-Main Banner" /><br/>
@@ -18,7 +18,7 @@ The Movie DB API를 이용한 영화 정보 사이트.
      src="https://user-images.githubusercontent.com/43628429/90332248-42917800-dff6-11ea-8d5e-cdaee582df82.PNG"
      width="80%" height="auto" alt="Home-List" /><br/>
 
-2. Detail
+2. Detail  
    <img
      src="https://user-images.githubusercontent.com/43628429/90332279-85ebe680-dff6-11ea-9b69-d7e16bf64d27.PNG"
      width="80%" height="auto" alt="Detail01" /><br/>
@@ -26,12 +26,12 @@ The Movie DB API를 이용한 영화 정보 사이트.
      src="https://user-images.githubusercontent.com/43628429/90332280-871d1380-dff6-11ea-8085-000ead5c265e.PNG"
      width="80%" height="auto" alt="Detail02" /><br/>
 
-3. MyMovie
+3. MyMovie  
    <img
      src="https://user-images.githubusercontent.com/43628429/90332282-897f6d80-dff6-11ea-90b8-8931abf3d90e.PNG"
      width="80%" height="auto" alt="MyMovie" /><br/>
 
-4. Search
+4. Search  
    <img
      src="https://user-images.githubusercontent.com/43628429/90332284-8ab09a80-dff6-11ea-8983-a0853289b5cb.PNG"
      width="80%" height="auto" alt="Search" /><br/>
