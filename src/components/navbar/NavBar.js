@@ -36,7 +36,7 @@ function NavBar() {
   return (
     <Nav isScroll={didScroll}>
       <LeftSection mobile={isTabletOrMobile}>
-        <Link to="/">Movies</Link>
+        <Link to="/movie">Movies</Link>
         <LeftMenu //
           ref={menuContainer}
           mobile={isTabletOrMobile}

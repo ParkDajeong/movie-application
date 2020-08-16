@@ -28,7 +28,7 @@ function Search() {
       setSearchData(data);
       dispatch(getSearchData(data));
     } else {
-      history.push("/");
+      history.push("/movie");
       setIsSearching(false);
       closeSearchBox();
     }
