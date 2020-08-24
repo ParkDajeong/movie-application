@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import { Poster, Info, Like } from "./MovieCard.style";
 import { getLikeList } from "../../store/modules/like";
@@ -9,10 +9,10 @@ import { Col } from "antd";
 import Rate from "./Rate";
 
 function MovieCard(props) {
+  const dispatch = useDispatch();
   let isTabletOrMobile = useMediaQuery({ query: "(max-width: 1199px)" });
   let isMobile = useMediaQuery({ query: "(max-width: 575px)" });
   const [isLike, setIsLike] = useState(props.liked);
-  const dispatch = useDispatch();
 
   const addLike = () => {
     const { movieId, rate, title, poster } = props;

@@ -1,19 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { getMainBanner } from "../../store/modules/movie";
 import * as S from "./MainBanner.style";
 
-function MainBanner({ type }) {
-  const dispatch = useDispatch();
-  const { result: mainMovie } = useSelector((state) => state.movie.mainBanner);
+function MainBanner({ mainMovie }) {
   const history = useHistory();
-
-  useEffect(() => {
-    dispatch(getMainBanner(type));
-  }, [type]);
-
   const onClickMoreBtn = () => history.push(`/movie/${mainMovie.id}`);
+
+  console.log("ddddddddd");
 
   return (
     <React.Fragment>
@@ -34,4 +27,4 @@ function MainBanner({ type }) {
   );
 }
 
-export default React.memo(MainBanner);
+export default MainBanner;
