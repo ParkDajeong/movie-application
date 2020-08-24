@@ -4,23 +4,18 @@ import * as S from "./MainBanner.style";
 
 function MainBanner({ mainMovie }) {
   const history = useHistory();
-  const onClickMoreBtn = () => history.push(`/movie/${mainMovie.id}`);
-
-  console.log("ddddddddd");
+  const { id, backdrop_path, title, tagline } = mainMovie;
+  const onClickMoreBtn = () => history.push(`/movie/${id}`);
 
   return (
     <React.Fragment>
-      <S.MainBanner image={mainMovie.backdrop_path}>
+      <S.MainBanner image={backdrop_path}>
         <div className="player"></div>
         <S.BannerCover />
         <S.MovieDetail>
-          <h2>{mainMovie.title}</h2>
-          <p>{mainMovie.tagline}</p>
-          <S.MoreBtn //
-            onClick={onClickMoreBtn}
-          >
-            자세히 보기
-          </S.MoreBtn>
+          <h2>{title}</h2>
+          <p>{tagline}</p>
+          <S.MoreBtn onClick={onClickMoreBtn}>자세히 보기</S.MoreBtn>
         </S.MovieDetail>
       </S.MainBanner>
     </React.Fragment>

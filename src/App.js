@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { getLikeList } from "./store/modules/like";
 import NavBar from "./components/navbar/NavBar";
 import Home from "./pages/Home";
+import SearchResult from "./pages/SearchResult";
 import MyMovie from "./pages/MyMovie";
 import MovieDetail from "./pages/MovieDetail";
 import "./App.css";
@@ -23,7 +24,7 @@ function App() {
         <Route exact path="/list/:type" component={Home} />
         <Route exact path="/mymovie" component={MyMovie} />
         <Route exact path="/movie/:movieId" component={MovieDetail} />
-        <Route exact path="/search" component={Home} />
+        <Route exact path="/search" component={SearchResult} />
       </Switch>
     </React.Fragment>
   );

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import queryStirng from "query-string";
@@ -9,55 +9,56 @@ import useDebounce from "../../hooks/useDebouce";
 import "antd/dist/antd.css";
 
 function Search() {
+  let inputRef = useRef(null);
+  const checkFirstSearch = useRef(true);
+  const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
   const [searchData, setSearchData] = useState("");
-  const [checkFirst, setCheckFirst] = useState(true);
-
-  let inputRef = useRef(null);
-  const history = useHistory();
-  const location = useLocation();
   const debouncedSearchTerm = useDebounce(searchData, 800);
 
   useEffect(() => {
-    const { search } = location;
+    const { search, pathname } = location;
     const { q: data } = queryStirng.parse(search);
 
-    if (data) {
+    if (pathname.includes("search") && data) {
       openSearchBox();
       setSearchData(data);
-      dispatch(getSearchData(data));
-    } else {
-      history.push("/movie");
-      setIsSearching(false);
-      closeSearchBox();
     }
+    console.log("일번");
+    console.log(history);
   }, []);
 
   useEffect(() => {
-    if (debouncedSearchTerm === "" && !checkFirst) {
-      history.goBack();
-      setCheckFirst(true);
-    }
+    const { search, pathname } = location;
+    const { q: data } = queryStirng.parse(search);
 
     if (debouncedSearchTerm) {
-      const path = `/search?q=${searchData}`;
-      if (checkFirst) {
+      const path = `/search?q=${debouncedSearchTerm}`;
+      if (checkFirstSearch.current) {
         history.push(path);
-        setCheckFirst(false);
+        checkFirstSearch.current = false;
+        console.log("push니?");
       } else {
         history.replace(path);
+        console.log("아님 replace?");
       }
+      dispatch(getSearchData(debouncedSearchTerm));
+      console.log("첫번째 큰 if문 빠져나오기");
+    } else if (debouncedSearchTerm === "") {
+      if (!checkFirstSearch.current) {
+        history.goBack();
+        checkFirstSearch.current = true;
+      } else {
+        history.push("/movie");
+      }
+      console.log("else if문");
     }
-    dispatch(getSearchData(debouncedSearchTerm));
-  }, [debouncedSearchTerm]);
 
-  useEffect(() => {
-    if (!location.pathname.includes("search")) {
-      closeSearchBox();
-      setCheckFirst(true);
-    }
-  }, [location.pathname]);
+    console.log("이번");
+    console.log(history);
+  }, [debouncedSearchTerm]);
 
   const openSearchBox = () => {
     setIsSearching(true);

@@ -6,11 +6,10 @@ export default (func) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(startLoading());
     (async () => {
       await func();
       dispatch(finishLoading());
     })();
-
-    return () => dispatch(startLoading());
   }, [func]);
 };

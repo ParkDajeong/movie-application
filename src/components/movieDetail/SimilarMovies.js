@@ -51,7 +51,7 @@ function MovieCast() {
             {similarMovies.map((movie) => (
               <MovieCard //
                 key={movie.id}
-                id={movie.id}
+                movieId={movie.id}
                 title={movie.title}
                 rate={movie.vote_average}
                 poster={movie.poster_path ? movie.poster_path : null}

@@ -1,11 +1,12 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getLikeList } from "../store/modules/like";
 import { getMovieDetail } from "../store/modules/movie";
 import MovieInfo from "../components/movieDetail/MovieInfo";
 import MovieCast from "../components/movieDetail/MovieCast";
 import MovieMedia from "../components/movieDetail/MovieMedia";
 import SimilarMovies from "../components/movieDetail/SimilarMovies";
-import { WaveTopBottomLoading } from "react-loadingg";
+import { TransverseLoading } from "react-loadingg";
 import useLoading from "../hooks/useLoading";
 
 function MovieDetail({ match }) {
@@ -21,21 +22,11 @@ function MovieDetail({ match }) {
 
   useLoading(getMovieInfo);
 
-  // useEffect(() => {
-  //   let mounted = true;
-  //   const getDetail = async () => {
-  //     dispatch(await getMovieDetail(movieId));
-  //     mounted && setIsLoading(false);
-  //   };
-
-  //   getDetail();
-  //   window.scrollTo(0, 0);
-
-  //   return () => {
-  //     mounted = false;
-  //     setIsLoading(true);
-  //   };
-  // }, [movieId]);
+  useEffect(() => {
+    return () => {
+      dispatch(getLikeList());
+    };
+  }, []);
 
   return (
     <React.Fragment>
@@ -47,7 +38,7 @@ function MovieDetail({ match }) {
           <SimilarMovies />
         </section>
       ) : (
-        <WaveTopBottomLoading //
+        <TransverseLoading //
           color={"firebrick"}
           size={"large"}
         />
