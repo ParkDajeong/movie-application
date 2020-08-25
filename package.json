@@ -1,5 +1,5 @@
 {
-  "name": "movie-app",
+  "name": "movie",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -48,5 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://parkdajeong.github.io/movie-application/"
+  "homepage": "https://parkdajeong.github.io/movie/"
 }
