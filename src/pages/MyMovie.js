@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import MovieCard from "../components/movieList/MovieCard";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
 import { useSelector } from "react-redux";
-import { NoData } from "../components/movieDetail/MovieMedia.style";
+import { NoData } from "../components/common/NoData";
 import { Row } from "antd";
 
 function MyMovie() {

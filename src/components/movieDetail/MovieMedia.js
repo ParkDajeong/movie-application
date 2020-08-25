@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as S from "./MovieMedia.style";
+import { NoData } from "../common/NoData";
 import mediumZoom from "medium-zoom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -96,7 +97,7 @@ function MovieCast() {
               ))}
             </Slider>
           ) : (
-            <S.NoData>영화 이미지가 존재하지 않습니다.</S.NoData>
+            <NoData>영화 이미지가 존재하지 않습니다.</NoData>
           ))}
         {mediaType === "video" &&
           (videos.length > 0 ? (
@@ -117,7 +118,7 @@ function MovieCast() {
               ))}
             </Slider>
           ) : (
-            <S.NoData>관련 영상이 존재하지 않습니다.</S.NoData>
+            <NoData>관련 영상이 존재하지 않습니다.</NoData>
           ))}
       </React.Fragment>
     </S.MediaSection>
