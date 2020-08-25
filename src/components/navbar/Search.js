@@ -5,8 +5,8 @@ import { getSearchData } from "../../store/modules/search";
 import { SearchBox, SearchForm, SearchBtn } from "./Search.style";
 import { SearchOutlined } from "@ant-design/icons";
 import useDebounce from "../../hooks/useDebouce";
-import "antd/dist/antd.css";
 import useLoading from "../../hooks/useLoading";
+import "antd/dist/antd.css";
 
 function Search() {
   const history = useHistory();
@@ -14,6 +14,7 @@ function Search() {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const checkFirstSearch = useRef(true);
+  const [openSearchForm, setOpenSearchForm] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchData, setSearchData] = useState("");
   const debouncedSearch = useDebounce(searchData, 800);
@@ -21,13 +22,18 @@ function Search() {
   useEffect(() => {
     const { pathname } = location;
 
-    if (pathname.includes("search")) {
+    if (pathname.includes("search") && !openSearchForm) {
       history.replace("/movie");
     }
-  }, []);
+    if (!pathname.includes("search") && !pathname.includes("/movie/")) {
+      setOpenSearchForm(false);
+      setSearchData("");
+      setIsSearching(false);
+    }
+  }, [location]);
 
   const loadSearchResult = useCallback(async () => {
-    if (!isSearching) return;
+    if (!openSearchForm) return;
     if (debouncedSearch) {
       if (checkFirstSearch.current) {
         history.push("/search");
@@ -36,6 +42,7 @@ function Search() {
         history.replace("/search");
       }
       dispatch(await getSearchData(debouncedSearch));
+      setIsSearching(true);
     } else if (debouncedSearch === "") {
       if (!checkFirstSearch.current) {
         history.goBack();
@@ -43,6 +50,7 @@ function Search() {
       } else {
         history.push("/movie");
       }
+      setIsSearching(false);
     }
   }, [debouncedSearch]);
 
@@ -53,23 +61,19 @@ function Search() {
   };
 
   const openSearchBox = () => {
-    setIsSearching(true);
+    setOpenSearchForm(true);
     inputRef.current.focus();
   };
 
   const closeSearchBox = () => {
-    const { pathname } = location;
-
-    if (pathname.includes("search")) {
-      setIsSearching(true);
-      return;
+    if (!isSearching) {
+      setOpenSearchForm(false);
+      setSearchData("");
     }
-    setIsSearching(false);
-    setSearchData("");
   };
 
   const toggleSearchBtn = () => {
-    !isSearching ? openSearchBox() : closeSearchBox();
+    !openSearchForm ? openSearchBox() : closeSearchBox();
   };
 
   return (
@@ -79,11 +83,11 @@ function Search() {
         value={searchData}
         placeholder="Search"
         prefix={<SearchOutlined />}
-        searchopen={isSearching ? 1 : 0}
+        searchopen={openSearchForm ? 1 : 0}
         onChange={onChange}
       />
       <SearchBtn //
-        searchopen={isSearching ? 1 : 0}
+        searchopen={openSearchForm ? 1 : 0}
         onClick={toggleSearchBtn}
       >
         <SearchOutlined />
