@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/movie-application/static/css/main.8f06c87a.chunk.css",
-    "main.js": "/movie-application/static/js/main.6896dfef.chunk.js",
-    "main.js.map": "/movie-application/static/js/main.6896dfef.chunk.js.map",
+    "main.css": "/movie-application/static/css/main.53d28099.chunk.css",
+    "main.js": "/movie-application/static/js/main.81716018.chunk.js",
+    "main.js.map": "/movie-application/static/js/main.81716018.chunk.js.map",
     "runtime-main.js": "/movie-application/static/js/runtime-main.6e1ae0a7.js",
     "runtime-main.js.map": "/movie-application/static/js/runtime-main.6e1ae0a7.js.map",
     "static/css/2.d4ee3923.chunk.css": "/movie-application/static/css/2.d4ee3923.chunk.css",
-    "static/js/2.45fb0c50.chunk.js": "/movie-application/static/js/2.45fb0c50.chunk.js",
-    "static/js/2.45fb0c50.chunk.js.map": "/movie-application/static/js/2.45fb0c50.chunk.js.map",
+    "static/js/2.7de99afa.chunk.js": "/movie-application/static/js/2.7de99afa.chunk.js",
+    "static/js/2.7de99afa.chunk.js.map": "/movie-application/static/js/2.7de99afa.chunk.js.map",
     "index.html": "/movie-application/index.html",
-    "precache-manifest.a3d2787bb7a8dcd25fc60589894ccce3.js": "/movie-application/precache-manifest.a3d2787bb7a8dcd25fc60589894ccce3.js",
+    "precache-manifest.d090b0238dc4b88cb78eb68fdff23efa.js": "/movie-application/precache-manifest.d090b0238dc4b88cb78eb68fdff23efa.js",
     "service-worker.js": "/movie-application/service-worker.js",
     "static/css/2.d4ee3923.chunk.css.map": "/movie-application/static/css/2.d4ee3923.chunk.css.map",
-    "static/css/main.8f06c87a.chunk.css.map": "/movie-application/static/css/main.8f06c87a.chunk.css.map",
-    "static/js/2.45fb0c50.chunk.js.LICENSE.txt": "/movie-application/static/js/2.45fb0c50.chunk.js.LICENSE.txt",
+    "static/css/main.53d28099.chunk.css.map": "/movie-application/static/css/main.53d28099.chunk.css.map",
+    "static/js/2.7de99afa.chunk.js.LICENSE.txt": "/movie-application/static/js/2.7de99afa.chunk.js.LICENSE.txt",
     "static/media/no-poster.png": "/movie-application/static/media/no-poster.d38bc38a.png",
     "static/media/slick-theme.css": "/movie-application/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6e1ae0a7.js",
     "static/css/2.d4ee3923.chunk.css",
-    "static/js/2.45fb0c50.chunk.js",
-    "static/css/main.8f06c87a.chunk.css",
-    "static/js/main.6896dfef.chunk.js"
+    "static/js/2.7de99afa.chunk.js",
+    "static/css/main.53d28099.chunk.css",
+    "static/js/main.81716018.chunk.js"
   ]
 }
