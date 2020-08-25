@@ -1,4 +1,4 @@
-import * as MovieAPI from "../../lib/movieAPI";
+import { getSearchResults } from "../api/searchAPI";
 import { handleActions } from "redux-actions";
 
 const GET_SEARCH_RESULTS = "movieApp/GET_SEARCH_RESULTS";
@@ -24,7 +24,7 @@ export const getSearchData = async (query) => {
       searchResults: initialState.searchResults,
     };
   }
-  const result = await MovieAPI.getSearchResults(query);
+  const result = await getSearchResults(query);
 
   return {
     type: GET_SEARCH_RESULTS,

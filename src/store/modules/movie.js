@@ -4,7 +4,6 @@ import { handleActions } from "redux-actions";
 const GET_MOVIES = "movieApp/GET_MOVIES";
 const GET_MAINBANNERS = "movieApp/GET_MAINBANNERS";
 const GET_MOVIE_DETAIL = "movieApp/GET_MOVIE_DETAIL";
-//const CHANGE_DETAIL_STATE = "movieApp/GET_MOVIE_DETAIL";
 
 const initialState = {
   movies: {

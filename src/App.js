@@ -3,10 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { getLikeList } from "./store/modules/like";
 import NavBar from "./components/navbar/NavBar";
-import Home from "./pages/Home";
-import SearchResult from "./pages/SearchResult";
-import MyMovie from "./pages/MyMovie";
-import MovieDetail from "./pages/MovieDetail";
+import { Home, SearchResult, MyMovie, MovieDetail } from "./pages";
 import "./App.css";
 
 function App() {

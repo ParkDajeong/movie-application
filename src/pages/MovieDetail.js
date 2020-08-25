@@ -2,11 +2,8 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLikeList } from "../store/modules/like";
 import { getMovieDetail } from "../store/modules/movie";
-import MovieInfo from "../components/movieDetail/MovieInfo";
-import MovieCast from "../components/movieDetail/MovieCast";
-import MovieMedia from "../components/movieDetail/MovieMedia";
-import SimilarMovies from "../components/movieDetail/SimilarMovies";
-import Loading from "../components/common/Loading";
+import { Loading } from "../components/common";
+import { MovieInfo, MovieCast, MovieMedia, SimilarMovies } from "../components/movieDetail";
 import useLoading from "../hooks/useLoading";
 
 function MovieDetail({ match }) {

@@ -1,17 +1,5 @@
-import axios from "axios";
-import { API_URL, API_KEY, IMAGE_BASE_URL, YOUTUBE_URL } from "../../config/config";
-
-export const getData = async (type, language, query) => {
-  const ko = language ? `&language=${language}` : "";
-  const queryStr = query ? `&query=${query}` : "";
-  const path = `${API_URL}${type}?api_key=${API_KEY}${ko}${queryStr}`;
-  const result = await axios
-    .get(path) //
-    .then((response) => response.data)
-    .catch((err) => console.log(err));
-
-  return result;
-};
+import { getData } from "./getData";
+import { IMAGE_BASE_URL, YOUTUBE_URL } from "../../config/config";
 
 export const getMovieList = async (path) => {
   const result = (await getData(path, "ko")).results;
@@ -112,29 +100,4 @@ export const getSimilarMovies = async (id) => {
   });
 
   return similarMovies;
-};
-
-export const getAllLikeMovies = () => {
-  let likeMovies = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const value = JSON.parse(localStorage.getItem(key));
-
-    likeMovies.push(value);
-  }
-  return likeMovies;
-};
-
-export const getSearchResults = async (query) => {
-  const result = (await getData(`search/movie`, "ko", query)).results;
-  const searchResult = result.map((movie) => {
-    return {
-      id: movie.id,
-      title: movie.title,
-      vote_average: movie.vote_average,
-      poster_path: movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : null,
-    };
-  });
-
-  return searchResult;
 };

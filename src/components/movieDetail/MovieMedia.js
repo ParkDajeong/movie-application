@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import * as S from "./MovieMedia.style";
-import { NoData } from "../common/NoData";
+import { NoData } from "../common";
 import mediumZoom from "medium-zoom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

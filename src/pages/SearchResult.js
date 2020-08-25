@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
-import MovieCard from "../components/movieList/MovieCard";
+import { MovieCard } from "../components/movieList";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
-import Loading from "../components/common/Loading";
-import { NoData } from "../components/common/NoData";
+import { Loading, NoData } from "../components/common";
 import { Row } from "antd";
 
 function SearchResult() {

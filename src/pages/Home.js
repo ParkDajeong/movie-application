@@ -1,13 +1,12 @@
 import React, { Fragment, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MovieCard from "../components/movieList/MovieCard";
-import MainBanner from "../components/movieList/MainBanner";
-import { getMovieList, getMainBanner } from "../store/modules/movie";
+import { Loading } from "../components/common";
+import { MovieCard, MainBanner } from "../components/movieList";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
-import { Row } from "antd";
 import { getLikeList } from "../store/modules/like";
+import { getMovieList, getMainBanner } from "../store/modules/movie";
 import useLoading from "../hooks/useLoading";
-import Loading from "../components/common/Loading";
+import { Row } from "antd";
 
 const listType = {
   trend: "trending/movie/week",
