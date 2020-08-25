@@ -78,7 +78,7 @@ const LeftMenu = styled.ul`
           }
           .nav_menu {
             cursor: pointer;
-            width: ${(props) => (props.menuOpen ? "27%" : "100%")};
+            width: ${(props) => (props.menuOpen ? "30%" : "100%")};
             margin-bottom: 30px;
             span {
               font-size: small;
