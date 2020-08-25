@@ -11,5 +11,7 @@ export default (func) => {
       await func();
       dispatch(finishLoading());
     })();
+
+    return () => dispatch(startLoading());
   }, [func]);
 };

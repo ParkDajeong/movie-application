@@ -1,10 +1,13 @@
 import React from "react";
-import { WaveTopBottomLoading } from "react-loadingg";
+import { TransverseLoading } from "react-loadingg";
 
 function Loading() {
   return (
     <React.Fragment>
-      <WaveTopBottomLoading />
+      <TransverseLoading //
+        color={"firebrick"}
+        size={"large"}
+      />
     </React.Fragment>
   );
 }

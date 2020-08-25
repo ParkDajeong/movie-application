@@ -57,7 +57,7 @@ const Description = styled.div`
     font-size: 2rem;
   }
   p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     margin-top: 55px;
     padding: 5px;
     overflow: auto;

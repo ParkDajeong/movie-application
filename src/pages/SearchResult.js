@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import MovieCard from "../components/movieList/MovieCard";
 import { GridWrapper } from "../components/movieList/MovieCard.style";
-import { TransverseLoading } from "react-loadingg";
+import Loading from "../components/common/Loading";
 import { NoData } from "../components/common/NoData";
 import { Row } from "antd";
 
@@ -37,10 +37,7 @@ function SearchResult() {
           </GridWrapper>
         </Fragment>
       ) : (
-        <TransverseLoading //
-          color={"firebrick"}
-          size={"large"}
-        />
+        <Loading />
       )}
     </Fragment>
   );

@@ -9,13 +9,11 @@ import "antd/dist/antd.css";
 import useLoading from "../../hooks/useLoading";
 
 function Search() {
-  const inputRef = useRef(null);
-  const searchBox = useRef(null);
-  const firstEnter = useRef(false);
-  const checkFirstSearch = useRef(true);
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
+  const checkFirstSearch = useRef(true);
   const [isSearching, setIsSearching] = useState(false);
   const [searchData, setSearchData] = useState("");
   const debouncedSearch = useDebounce(searchData, 800);

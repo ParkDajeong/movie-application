@@ -7,7 +7,7 @@ import { GridWrapper } from "../components/movieList/MovieCard.style";
 import { Row } from "antd";
 import { getLikeList } from "../store/modules/like";
 import useLoading from "../hooks/useLoading";
-import { TransverseLoading } from "react-loadingg";
+import Loading from "../components/common/Loading";
 
 const listType = {
   trend: "trending/movie/week",
@@ -59,10 +59,7 @@ function Home({ match }) {
           </GridWrapper>
         </Fragment>
       ) : (
-        <TransverseLoading //
-          color={"firebrick"}
-          size={"large"}
-        />
+        <Loading />
       )}
     </Fragment>
   );

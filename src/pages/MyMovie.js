@@ -16,7 +16,7 @@ function MyMovie() {
     <Fragment>
       <GridWrapper nobanner>
         <h2>나의 영화</h2>
-        {likeListSuccess ? (
+        {likeListSuccess && likeList.length > 0 ? (
           <Row gutter={[20, 30]}>
             {likeList.map((movie) => (
               <MovieCard //
