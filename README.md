@@ -6,7 +6,7 @@ The Movie DB API를 이용한 영화 정보 사이트.<br />
 최신 영화, 혹은 인기있는 영화의 줄거리, 캐스트, 평점 등 관련 정보를 제공하며, 검색을 통해 원하는 영화의 정보를 찾아볼 수 있습니다.<br />
 또한 마음의 드는 영화를 찜하여 따로 모아 볼 수 있습니다.<br />
 
-링크: [MOVIE WEB](https://parkdajeong.github.io/movie-application/)<br/>
+링크: [MOVIE WEB](https://parkdajeong.github.io/movie/)<br/>
 
 ## 사이트 화면
 
